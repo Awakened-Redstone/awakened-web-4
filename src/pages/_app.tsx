@@ -11,7 +11,7 @@ import {FaGithub, FaRegCopyright} from "react-icons/fa";
 import FabricLogo from "@/components/FabricLogo";
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
+import {Image} from "@nextui-org/image";
 
 const defaultClasses = {
     navContent: "font-semibold hover:bg-black dark:hover:bg-[#aaaaaa10] px-[0.5rem] py-[0.15rem] rounded-full",

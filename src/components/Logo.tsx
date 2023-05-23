@@ -1,8 +1,8 @@
-export default function Logo(props: {width?: number, height?: number, className?: string}) {
+export default function Logo(props: {width?: number | string, height?: number | string, className?: string}) {
     const width = props.width ? props.width : 150, height = props.height ? props.height : 15;
 
     return (
-        <svg width={width} height={height} viewBox={"0 0 150 15"} xmlns="http://www.w3.org/2000/svg" version="1.1" className={props.className}>
+        <svg width={width} height={height} viewBox={"0 0 165 15"} xmlns="http://www.w3.org/2000/svg" version="1.1" className={props.className}>
             <g>
                 <g transform="matrix(0.01111111,0,0,0.01111111,-2.6666664,-3.9999996)">
                     <path fill="#fe0000" d="m 600,1260 v -60 h 60 60 v -60 -60 h 60 60 v 60 60 h -60 -60 v 60 60 H 660 600 Z M 480,1020 v -60 h 60 60 v 60 60 h -60 -60 z m 480,0 v -60 h -60 -60 v -60 -60 h -60 -60 v -60 -60 h 60 60 v -60 -60 h 60 60 v 60 60 h -60 -60 v 60 60 h 60 60 v 60 60 h 60 60 v 60 60 h -60 -60 z m 120,-240 v -60 h 60 60 v 60 60 h -60 -60 z"/>
