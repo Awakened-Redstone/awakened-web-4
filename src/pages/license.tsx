@@ -4,15 +4,9 @@ import {Card, CardBody, CardHeader} from "@nextui-org/card";
 import React from "react";
 import {Button} from "@nextui-org/react";
 import {FiCopy, FiDownload} from "react-icons/fi";
-import * as fs from "fs";
+import license from "@/system/license";
 
-export const config = {runtime: 'edge'};
-
-export function getServerSideProps() {
-    return {props: {license: String(fs.readFileSync("./src/system/license"))}}
-}
-
-export default function License({license}: { license: string}) {
+export default function License() {
     return (
         <>
             <Head>
@@ -27,7 +21,7 @@ export default function License({license}: { license: string}) {
                 <Card>
                     <CardHeader>The license</CardHeader>
                     <CardBody className={"whitespace-pre-wrap"}>
-                        {license}
+                        {String(license)}
                     </CardBody>
                 </Card>
             </main>

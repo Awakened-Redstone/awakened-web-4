@@ -5,7 +5,7 @@ import {Skeleton, Tooltip} from "@nextui-org/react";
 import Link from "next/link";
 import {formatVersions, McVersion, ModrinthMod, PistonMeta} from "@/system/utils";
 
-export const config = {runtime: 'edge'};
+export const runtime = 'edge';
 
 //versions is usually with the older versions first, so we need to reverse it, pistonmeta is used to know which versions are stable, it has the newest versions first, if pistonmeta is null we fallback to the latest version on version list
 function getLatestStable(versions: string[], pistonMeta: PistonMeta): string {
@@ -55,7 +55,7 @@ export default function ModCard({mod, pistonMeta}: {mod: ModrinthMod, pistonMeta
             <CardBody className={"w-full p-3"}>
                 <div className={"flex w-full h-full"}>
                     <div className={"mr-4"}>
-                        <Image className={"min-w-[6rem] min-h-[6rem] w-[6rem] h-[6rem]"} src={mod.icon_url ? mod.icon_url : "https://cdn-raw.modrinth.com/placeholder.svg"}/>
+                        <Image className={"min-w-[6rem] min-h-[6rem] w-[6rem] h-[6rem]"} src={mod.icon_url ? mod.icon_url : "https://cdn-raw.modrinth.com/placeholder.svg"} alt={mod.title}/>
                     </div>
                     <div className={"flex flex-col justify-between mod-card-descver h-full"}>
                         <div className={"h-fit font-bold text-[1.5rem] leading-5 mb-[4px]"}>{mod.title}</div>

@@ -9,8 +9,6 @@ import {GrJava} from "react-icons/gr";
 import Link from "next/link";
 import React from "react";
 
-export const config = {runtime: 'edge'};
-
 export default function Home() {
     return (
         <>
