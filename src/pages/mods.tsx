@@ -4,6 +4,8 @@ import React from "react";
 import ModCard from "@/components/ModCard";
 import {ModrinthMod, PistonMeta} from "@/system/utils";
 
+export const config = {runtime: 'edge'};
+
 export async function getServerSideProps(context: any) {
     const modsRes = await fetch("https://api.modrinth.com/v2/user/awakened-redstone/projects")
     const postonMetaRes = await fetch("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")

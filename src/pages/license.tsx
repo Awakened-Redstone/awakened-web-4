@@ -6,6 +6,8 @@ import {Button} from "@nextui-org/react";
 import {FiCopy, FiDownload} from "react-icons/fi";
 import * as fs from "fs";
 
+export const config = {runtime: 'edge'};
+
 export function getServerSideProps() {
     return {props: {license: String(fs.readFileSync("./src/system/license"))}}
 }

@@ -5,6 +5,8 @@ import {Skeleton, Tooltip} from "@nextui-org/react";
 import Link from "next/link";
 import {formatVersions, McVersion, ModrinthMod, PistonMeta} from "@/system/utils";
 
+export const config = {runtime: 'edge'};
+
 //versions is usually with the older versions first, so we need to reverse it, pistonmeta is used to know which versions are stable, it has the newest versions first, if pistonmeta is null we fallback to the latest version on version list
 function getLatestStable(versions: string[], pistonMeta: PistonMeta): string {
     if (!pistonMeta) return versions[versions.length - 1];
