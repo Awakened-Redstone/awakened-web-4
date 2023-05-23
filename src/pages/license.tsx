@@ -21,7 +21,7 @@ export default function License() {
                 <Card>
                     <CardHeader>The license</CardHeader>
                     <CardBody className={"whitespace-pre-wrap"}>
-                        {String(license)}
+                        {license}
                     </CardBody>
                 </Card>
             </main>
