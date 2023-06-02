@@ -19,10 +19,12 @@ import React from "react";
 import {defaultClasses, formatNumber, ModrinthMod} from "@/system/utils";
 import Flicking, { ViewportSlot } from "@egjs/react-flicking";
 import { Arrow, Perspective } from "@egjs/flicking-plugins";
+import {Tooltip} from "@nextui-org/react";
 
 import "@egjs/flicking-plugins/dist/arrow.css";
 import "@egjs/react-flicking/dist/flicking.css";
-import {Tooltip} from "@nextui-org/react";
+
+export const config = {runtime: 'experimental-edge'};
 
 const classes = {
     navLinkContent: `${defaultClasses.navContent} ${defaultClasses.link}`
