@@ -1,3 +1,8 @@
+export const defaultClasses = {
+    navContent: "font-semibold hover:bg-black dark:hover:bg-[#aaaaaa10] px-[0.5rem] py-[0.15rem] rounded-full",
+    link: "relative inline-flex items-center outline-none data-[focus-visible=true]:outline-none data-[focus-visible=true]:ring-2 data-[focus-visible=true]:ring-primary data-[focus-visible=true]:ring-offset-2 data-[focus-visible=true]:ring-offset-background data-[focus-visible=true]:dark:ring-offset-background-dark no-underline hover:opacity-80 transition-opacity text-base whitespace-nowrap box-border data-[active=true]:font-semibold",
+}
+
 export type PistonMeta = {
     latest: {
         release: string,
@@ -67,8 +72,19 @@ export type ModrinthMod = {
     }[]
 }
 
-export const formatVersions = (versionArray: string[], pistonMeta: any) => {
-    const allVersions = pistonMeta.versions.reverse()
+export function formatNumber(number: number, abbreviate: boolean = true): string {
+    const x = +number
+    if (x >= 1000000 && abbreviate) {
+        return (x / 1000000).toFixed(2).toString() + 'M'
+    } else if (x >= 10000 && abbreviate) {
+        return (x / 1000).toFixed(1).toString() + 'k'
+    } else {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
+}
+
+export function formatVersions(versionArray: string[], pistonMeta: PistonMeta): string {
+    const allVersions = [...pistonMeta.versions].reverse()
     const allReleases = allVersions.filter((x: McVersion) => x.type === 'release')
 
     const intervals = []
@@ -84,10 +100,10 @@ export const formatVersions = (versionArray: string[], pistonMeta: any) => {
             const intervalBase = intervals[currentInterval]
 
             if (
-                (index - intervalBase[intervalBase.length - 1][1] === 1 ||
-                    releaseIndex - intervalBase[intervalBase.length - 1][2] === 1) &&
-                (allVersions[intervalBase[0][1]].version_type === 'release' ||
-                    allVersions[index].version_type !== 'release')
+                (index - (intervalBase[intervalBase.length - 1][1] as number) === 1 ||
+                    releaseIndex - (intervalBase[intervalBase.length - 1][2] as number) === 1) &&
+                (allVersions[intervalBase[0][1] as number].type === 'release' ||
+                    allVersions[index].type !== 'release')
             ) {
                 intervalBase[1] = [versionArray[i], index, releaseIndex]
             } else {
@@ -103,19 +119,19 @@ export const formatVersions = (versionArray: string[], pistonMeta: any) => {
 
         if (interval.length === 2 && interval[0][2] !== -1 && interval[1][2] === -1) {
             let lastSnapshot = null
-            for (let j = interval[1][1]; j > interval[0][1]; j--) {
-                if (allVersions[j].version_type === 'release') {
+            for (let j: number = interval[1][1] as number; j > (interval[0][1] as number); j--) {
+                if (allVersions[j].type === 'release') {
                     newIntervals.push([
                         interval[0],
                         [
-                            allVersions[j].version,
+                            allVersions[j].id,
                             j,
-                            allReleases.findIndex((x: McVersion) => x.id === allVersions[j].version),
+                            allReleases.findIndex((x: McVersion) => x.id === allVersions[j].id),
                         ],
                     ])
 
                     if (lastSnapshot !== null && lastSnapshot !== j + 1) {
-                        newIntervals.push([[allVersions[lastSnapshot].version, lastSnapshot, -1], interval[1]])
+                        newIntervals.push([[allVersions[lastSnapshot].id, lastSnapshot, -1], interval[1]])
                     } else {
                         newIntervals.push([interval[1]])
                     }

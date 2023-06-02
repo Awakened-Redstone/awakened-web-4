@@ -4,7 +4,8 @@ import {Card, CardBody, CardHeader} from "@nextui-org/card";
 import React from "react";
 import {Button} from "@nextui-org/react";
 import {FiCopy, FiDownload} from "react-icons/fi";
-import license from "@/system/license";
+import license from "/public/files/license";
+import Link from "next/link";
 
 export default function License() {
     return (
@@ -15,8 +16,8 @@ export default function License() {
 
             <main className={`${styles.main} max-w-[1400px] mx-auto`}>
                 <div className={"flex gap-2 mx-auto w-fit mb-2"}>
-                    <Button><FiDownload/>&nbsp;Download</Button>
-                    <Button><FiCopy/>&nbsp;Copy</Button>
+                    <Link href={"/files/license"} download={"License"}><Button><FiDownload/>&nbsp;Download</Button></Link>
+                    <Button onPress={() => navigator.clipboard.writeText(license)}><FiCopy/>&nbsp;Copy</Button>
                 </div>
                 <Card>
                     <CardHeader>The license</CardHeader>

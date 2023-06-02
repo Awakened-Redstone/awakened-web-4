@@ -39,16 +39,16 @@ export default function ModCard({mod, pistonMeta}: {mod: ModrinthMod, pistonMeta
         getData(mod).then((data) => {
             setData(data);
         });
-    }, [mod]);
+    }, [mod, pistonMeta]);
 
-    if (!data) return (
+    if (!(data && mod && pistonMeta)) return (
         <Skeleton className={"rounded-xl"}>
             <div className="w-[200px] h-[100px]">NextUI</div>
         </Skeleton>
     );
 
-    const latest: string = getLatestStable([...mod.game_versions], pistonMeta);
-    const versions = formatVersions(mod.game_versions, pistonMeta);
+    const latest: string = getLatestStable([...mod.game_versions], {...pistonMeta});
+    const versions: string = formatVersions([...mod.game_versions], {...pistonMeta});
 
     return (
         <Card className={"bg-white dark:bg-[#26292f] border-none hover:scale-[1.01]"} as={Link} href={"https://modrinth.com/mod/" + mod.slug} target={"_blank"}>

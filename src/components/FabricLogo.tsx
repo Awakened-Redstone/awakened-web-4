@@ -1,4 +1,4 @@
-export default function FabricLogo(props: {width?: number, height?: number, className?: string}) {
+export default function FabricLogo(props: {width?: number | string, height?: number | string, className?: string}) {
     const width = props.width ? props.width : 22.285715, height = props.height ? props.height : 24;
 
     return (

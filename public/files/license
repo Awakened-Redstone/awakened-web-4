@@ -1,8 +1,9 @@
-Awakened Redstone's Mod License
+Awakened Redstone's Mod License     by Awakened Redstone
+Version 1 | Released [day] [month] [year]
 
 Copyright (c) [year(s)] [fullname]
 
-The software is provided as-is, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 This license is provided as-is, and may be subject to change at any time.
 The content of this license may be subject to my, the license author, interpretation. If you are unsure about something, please contact me, the license author.
@@ -18,7 +19,22 @@ Abuse of this license may result in a DMCA takedown request or other legal actio
 
 This license, by default, applies to the entire project, unless otherwise specified.
 This license, while developed mainly for Minecraft mods, may be used in any project, as long as it does not violate this license.
-This license is free to be modified, as long as it indicates that it is a modified version of this license.
+This license is free to be modified, as long as it clearly indicates that it is a modified version of this license.
+I, the author, am not reliable for any damages caused by a modified version of this license.
+Any change to the license content is considered a modification of the license, even if it is a single character.
+You, the license modifier, are required to provide a link to the original license.
+You, the license modifier, are required to update the "by" section of the license to contain your name.
+You, the license modifier, are not allowed to keep the "by" section of the license as the original author's name.
+You, the license modifier, are not allowed to keep my, the original author's, name in the "by" section of the license.
+You, the license modifier, are not allowed to remove the "by" section of the license.
+The "by" section of the license must be in the format of "by [name]".
+The "by" section of the license must be separated from the license name by a sequence of exactly 5 spaces.
+The release date of the license must be in the format of "[day] [month] [year]".
+The release date of the license can not be in the future.
+The release date of the license can not be removed.
+The version of the license must be in the format of "Version [number]".
+The version of the license can not be removed.
+The version of the license mmust be updated if the license content is changed, even if it is a single character.
 
 "I", "my", or any first-person pronouns in this license refers to the author of the project this license is in, unless otherwise specified.
 "You" or any second-person pronouns in this license refers to the user of the project this license is in, unless otherwise specified.

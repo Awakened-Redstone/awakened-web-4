@@ -1,5 +1,5 @@
 {
-  "name": "awakened-web-4",
+  "name": "awakened-web",
   "version": "4.0.0",
   "private": true,
   "scripts": {
@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@egjs/flicking-plugins": "^4.7.0",
+    "@egjs/react-flicking": "^4.10.9",
     "@nextui-org/react": "^0.0.0-dev-v2-20230505232443",
     "@types/node": "20.1.3",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
+    "classnames": "^2.3.2",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "next": "13.4.1",
@@ -20,7 +23,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "use-debounce": "^9.0.4"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",

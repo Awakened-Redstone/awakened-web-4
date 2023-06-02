@@ -24,7 +24,7 @@ export default function Mods({mods, pistonMeta}: {mods: ModrinthMod[], pistonMet
             </Head>
             <main className={styles.main}>
                 <div className={"grid gap-2 mod-cards max-w-[1380px] mx-auto"}>
-                    {mods.map((mod: ModrinthMod) => <ModCard mod={mod} pistonMeta={pistonMeta} key={mod.id}/>)}
+                    {mods.map((mod: ModrinthMod) => <ModCard mod={{...mod}} pistonMeta={{...pistonMeta}} key={mod.id}/>)}
                 </div>
             </main>
         </>

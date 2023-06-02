@@ -49,6 +49,20 @@ a {
   stroke: currentColor !important;
 }
 
+.fill-fix, .fill-fix path {
+  fill: currentColor !important;
+}
+
+.dropShadow {
+  filter: drop-shadow(4px 4px 0px rgb(0 0 0 / 0.25));
+}
+
+.kofi-glow {
+  box-shadow:
+          inset 0 0 300px #13C3FF,
+          0 0 20px #13C3FF;
+}
+
 #__next > div[data-overlay-container] > nav > header {
   background-color: #d7d9dc;
   border: none;
