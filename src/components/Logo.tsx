@@ -2,7 +2,7 @@ export default function Logo(props: { width?: number | string, height?: number |
     const width = props.width ? props.width : 180, height = props.height ? props.height : 15;
 
     return (
-        <svg width={width} height={height} viewBox="0 0 180 15" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <svg width={width} height={height} viewBox="0 0 180 15" version="1.1" xmlns="http://www.w3.org/2000/svg" className={props.className}>
             <g transform="scale(1.0028073,1.0227274)">
                 <g transform="matrix(0.01111111,0,0,0.01111111,-2.6666664,-3.9999996)">
                     <image width="1435.969" height="1408" preserveAspectRatio="none"

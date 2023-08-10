@@ -18,6 +18,9 @@ module.exports = {
         brand: {
           modrinth: "#00af5c"
         }
+      },
+      screens: {
+        'lmd': '864px',
       }
     },
   },

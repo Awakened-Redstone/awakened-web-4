@@ -3,7 +3,8 @@ import {Image} from "@nextui-org/image";
 import React, {useEffect} from "react";
 import {Skeleton, Tooltip} from "@nextui-org/react";
 import Link from "next/link";
-import {formatVersions, McVersion, ModrinthMod, PistonMeta} from "@/system/utils";
+import {McVersion, ModrinthMod, PistonMeta} from "@/system/types";
+import {formatVersions} from "@/system/utils";
 
 export const runtime = 'edge';
 
@@ -20,7 +21,7 @@ function getLatestStable(versions: string[], pistonMeta: PistonMeta): string {
     return versions[versions.length - 1];
 }
 
-export async function getData(mod: ModrinthMod) {
+async function getData(mod: ModrinthMod) {
     const res = await fetch('https://api.modrinth.com/v2/project/' + mod.slug + '/version');
     const versions = await res.json();
     // get latest stable version, if there is none, get latest version
@@ -34,7 +35,7 @@ export async function getData(mod: ModrinthMod) {
 }
 
 export default function ModCard({mod, pistonMeta}: {mod: ModrinthMod, pistonMeta: PistonMeta}) {
-    const [data, setData]: [any, any] = React.useState<ModrinthMod>(mod);
+    const [data, setData]: [any, any] = React.useState<ModrinthMod>(null as any);
     useEffect(() => {
         getData(mod).then((data) => {
             setData(data);
@@ -51,11 +52,11 @@ export default function ModCard({mod, pistonMeta}: {mod: ModrinthMod, pistonMeta
     const versions: string = formatVersions([...mod.game_versions], {...pistonMeta});
 
     return (
-        <Card className={"bg-white dark:bg-[#26292f] border-none hover:scale-[1.01]"} as={Link} href={"https://modrinth.com/mod/" + mod.slug} target={"_blank"}>
+        <Card className={"bg-white dark:bg-[#26292f] border-none hover:scale-[1.01] max-w-[calc(100vw-2rem)]"} as={Link} href={"https://modrinth.com/mod/" + mod.slug} target={"_blank"}>
             <CardBody className={"w-full p-3"}>
                 <div className={"flex w-full h-full"}>
-                    <div className={"mr-4"}>
-                        <Image className={"min-w-[6rem] min-h-[6rem] w-[6rem] h-[6rem]"} src={mod.icon_url ? mod.icon_url : "https://cdn-raw.modrinth.com/placeholder.svg"} alt={mod.title}/>
+                    <div className={"mr-4 my-auto"}>
+                        <Image className={"min-w-[4rem] min-h-[4rem] w-[4rem] h-[4rem] md:min-w-[6rem] md:min-h-[6rem] md:w-[6rem] md:h-[6rem]"} src={mod.icon_url ? mod.icon_url : "https://cdn-raw.modrinth.com/placeholder.svg"} alt={mod.title}/>
                     </div>
                     <div className={"flex flex-col justify-between mod-card-descver h-full"}>
                         <div className={"h-fit font-bold text-[1.5rem] leading-5 mb-[4px]"}>{mod.title}</div>

@@ -1,22 +1,39 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import React from "react";
+import React, {useEffect} from "react";
 import ModCard from "@/components/ModCard";
-import {ModrinthMod, PistonMeta} from "@/system/utils";
+import {ModrinthMod, PistonMeta} from "@/system/types";
+import {Skeleton} from "@nextui-org/react";
+import SpinningModrinthLogo from "@/components/SpinningModrinthLogo";
 
 export const config = {runtime: 'experimental-edge'};
 
-export async function getServerSideProps(context: any) {
+async function getData() {
     const modsRes = await fetch("https://api.modrinth.com/v2/user/awakened-redstone/projects")
-    const postonMetaRes = await fetch("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")
+    const pistonMetaRes = await fetch("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")
     const mods = await modsRes.json()
-    const pistonMeta = await postonMetaRes.json()
-    return {
-        props: {mods, pistonMeta}
-    }
+    const pistonMeta = await pistonMetaRes.json()
+
+    return {mods, pistonMeta};
 }
 
-export default function Mods({mods, pistonMeta}: {mods: ModrinthMod[], pistonMeta: PistonMeta}) {
+export default function Mods() {
+    const [mods, setMods]: [ModrinthMod[], any] = React.useState<ModrinthMod[]>([]);
+    const [pistonMeta, setPistonMeta]: [PistonMeta, any] = React.useState<PistonMeta>(null as any);
+    useEffect(() => {
+        if (mods && pistonMeta) return;
+        getData().then((data) => {
+            setMods(data.mods);
+            setPistonMeta(data.pistonMeta);
+        });
+    }, [mods, pistonMeta]);
+
+    if (!(mods && pistonMeta)) {
+        return (
+            <SpinningModrinthLogo className={"w-[4rem]"}/>
+        );
+    }
+
     return (
         <>
             <Head>

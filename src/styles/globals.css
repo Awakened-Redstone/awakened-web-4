@@ -4,6 +4,8 @@
 
 :root {
  background-color: #e5e7eb;
+
+  --color-brand-modrinth: theme('colors.brand.modrinth');
 }
 
 :root.dark {
@@ -70,4 +72,21 @@ a {
 
 #__next > div[data-overlay-container] > nav {
   background-image: none;
+}
+
+.modrinth-rotate {
+  animation: modrinth-rotate 2s infinite linear;
+}
+
+.modrinth-rotate-inner {
+  animation: modrinth-rotate 3s infinite linear reverse;
+}
+
+@keyframes modrinth-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

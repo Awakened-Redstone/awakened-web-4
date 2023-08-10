@@ -3,11 +3,11 @@ import styles from '@/styles/Home.module.css'
 import ModrinthLogo from '@/components/ModrinthLogo'
 import FabricLogo from "@/components/FabricLogo";
 import Logo from "@/components/Logo";
-import {SiJetbrains, SiKofi, SiModrinth} from "react-icons/si";
-import {FaGithub, FaJava, FaRegCopyright} from "react-icons/fa";
+import {SiDart, SiJetbrains, SiKofi, SiModrinth} from "react-icons/si";
+import {FaDiscord, FaGithub, FaJava, FaRegCopyright} from "react-icons/fa";
 import {
     TbAlertCircle,
-    TbBrandCss3, TbBrandFigma, TbBrandGit,
+    TbBrandCss3, TbBrandFigma, TbBrandFlutter, TbBrandGit,
     TbBrandHtml5, TbBrandJavascript,
     TbBrandNextjs, TbBrandReact,
     TbBrandTypescript, TbTools
@@ -15,14 +15,15 @@ import {
 import {HiExternalLink, HiCode} from "react-icons/hi";
 import {BsGithub} from "react-icons/bs";
 import Link from "next/link";
-import React from "react";
-import {defaultClasses, formatNumber, ModrinthMod} from "@/system/utils";
+import React, {useEffect} from "react";
+import {defaultClasses, formatNumber} from "@/system/utils";
 import Flicking, { ViewportSlot } from "@egjs/react-flicking";
 import { Arrow, Perspective } from "@egjs/flicking-plugins";
-import {Tooltip} from "@nextui-org/react";
+import {Skeleton, Tooltip} from "@nextui-org/react";
 
 import "@egjs/flicking-plugins/dist/arrow.css";
 import "@egjs/react-flicking/dist/flicking.css";
+import {ModrinthMod} from "@/system/types";
 
 export const config = {runtime: 'experimental-edge'};
 
@@ -30,12 +31,16 @@ const classes = {
     navLinkContent: `${defaultClasses.navContent} ${defaultClasses.link}`
 }
 
-export async function getServerSideProps(context: any) {
+export function getStaticProps(context: any) {
+    return {
+        props: {navless: true, borderless: true}
+    }
+}
+
+async function getData() {
     const modsRes = await fetch("https://api.modrinth.com/v2/user/awakened-redstone/projects");
     const mods = await modsRes.json();
-    return {
-        props: {mods, navless: true, borderless: true}
-    }
+    return mods;
 }
 
 function calculateDownloads(mods: ModrinthMod[]) {
@@ -46,7 +51,16 @@ function calculateDownloads(mods: ModrinthMod[]) {
     return downloads;
 }
 
-export default function Home({mods}: {mods: ModrinthMod[]} ) {
+export default function Home() {
+    const [mods, setMods]: [ModrinthMod[], any] = React.useState<ModrinthMod[]>(null as any);
+
+    useEffect(() => {
+        if (mods) return;
+        getData().then((data) => {
+            setMods(data);
+        });
+    }, [mods]);
+
     const _plugins = [
         new Arrow(),
         new Perspective({ rotate: -0.5, scale: 0.5, perspective: 1000 })
@@ -59,8 +73,8 @@ export default function Home({mods}: {mods: ModrinthMod[]} ) {
             </Head>
             <main className={`${styles.main} max-w-[1400px] mx-auto`}>
                 <div className={"mx-auto w-fit mb-[3rem] mt-6"}>
-                    <Logo width={"auto"} height={"3rem"}/>
-                    <div className={"justify-center flex"}>
+                    <Logo width={"auto"} height={"3rem"} className={"w-[80vw] mx-auto sm:w-auto"}/>
+                    <div className={"justify-center flex flex-wrap"}>
                         <Link href={"/mods"} className={`${classes.navLinkContent} text-xl`}>
                             <FabricLogo width={18.57145833333333} height={20}/>&nbsp;Mods
                         </Link>
@@ -69,6 +83,9 @@ export default function Home({mods}: {mods: ModrinthMod[]} ) {
                         </a>
                         <a className={`${classes.navLinkContent} text-xl`} href={"https://github.com/Awakened-Redstone"} target={"_blank"}>
                             <FaGithub/>&nbsp;Github&nbsp;<HiExternalLink/>
+                        </a>
+                        <a className={`${classes.navLinkContent} text-xl`} href={"https://discord.gg/MTqsjwMpN2"} target={"_blank"}>
+                            <FaDiscord/>&nbsp;Discord&nbsp;<HiExternalLink/>
                         </a>
                         <Tooltip content={"🚧 In development"} showArrow placement={"bottom"}>
                             <div className={`${defaultClasses.link} px-[0.5rem] py-[0.15rem] opacity-50 hover:opacity-50 cursor-no-drop text-xl`}>
@@ -80,26 +97,28 @@ export default function Home({mods}: {mods: ModrinthMod[]} ) {
                 <div className={"mt-[-2rem] mb-[2rem] w-[50%] flex items-center text-left mx-auto whitespace-break-spaces text-amber-600 font-semibold"}>
                     <TbAlertCircle className={"text-4xl"}/>
                     <div className={"pl-2"}>
-                        This is an early dev version of the website, the site may not behave properly on all devices and browsers.
+                        This is an early dev version of the website, it may not behave properly on all devices and browsers.
                     </div>
                 </div>
                 <div className={"mt-[-40px]"}>
                     <Flicking
-                        cameraClass={"flex flex-row gap-2 items-center px-2 mx-auto min-h-[360px] relative"}
+                        cameraClass={"flex flex-row items-center mx-auto min-h-[360px] relative"}
                         plugins={_plugins}
                         deceleration={0.03}
                         circular={false}
+                        defaultIndex={2}
+                        align={"center"}
                     >
                         <Link className={"relative w-[260px] h-[300px] bg-[#05CE45] rounded-2xl bg-opacity-50 flex flex-col hover:scale-[1.01] motion-reduce:transition-none"} draggable={false} href={"/mods"}>
                             <div className={"h-full flex"}>
                                 <div className={"mt-auto w-full h-fit"}>
-                                    <ModrinthLogo width={"auto"} height={"8rem"} className={"dropShadow mx-auto"}/>
+                                    <ModrinthLogo className={"dropShadow mx-auto w-auto h-[8rem]"}/>
                                 </div>
                             </div>
                             <div className={"h-full font-semibold text-center flex"}>
                                 <div className={"m-auto h-fit"}>
                                     <div className={"text-2xl"}>Downloads</div>
-                                    <div className={"text-5xl"}>{formatNumber(calculateDownloads(mods))}</div>
+                                    <div className={"text-5xl"}>{mods ? formatNumber(calculateDownloads(mods)) : "???"}</div>
                                 </div>
                             </div>
                         </Link>
@@ -125,17 +144,21 @@ export default function Home({mods}: {mods: ModrinthMod[]} ) {
                             </div>
                             <div className={"h-full font-semibold text-center flex"}>
                                 <div className={"m-auto h-fit"}>
-                                    <div className={"text-2xl"}>Languages</div>
+                                    <Tooltip content={<div>& Frameworks</div>} showArrow offset={-1}>
+                                        <div className={"text-2xl"}>Languages</div>
+                                    </Tooltip>
                                     <div className={"text-3xl w-full inline-flex justify-center items-center align-middle"}>
                                         <FaJava/>&nbsp;
-                                        <TbBrandJavascript/>&nbsp;
                                         <TbBrandTypescript/>&nbsp;
+                                        <TbBrandJavascript/>&nbsp;
                                         <TbBrandHtml5/>&nbsp;
+                                        <TbBrandCss3/>&nbsp;
                                     </div>
                                     <div className={"text-3xl w-full inline-flex justify-center items-center align-middle"}>
-                                        <TbBrandCss3/>&nbsp;
                                         <TbBrandReact/>&nbsp;
-                                        <TbBrandNextjs/>
+                                        <TbBrandNextjs/>&nbsp;
+                                        <TbBrandFlutter/>&nbsp;
+                                        <SiDart/>&nbsp;
                                     </div>
                                 </div>
                             </div>
