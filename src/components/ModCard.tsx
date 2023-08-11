@@ -5,6 +5,7 @@ import {Skeleton, Tooltip} from "@nextui-org/react";
 import Link from "next/link";
 import {McVersion, ModrinthMod, PistonMeta} from "@/system/types";
 import {formatVersions} from "@/system/utils";
+import {cachedFetch} from "@/system/network";
 
 export const runtime = 'edge';
 
@@ -22,7 +23,7 @@ function getLatestStable(versions: string[], pistonMeta: PistonMeta): string {
 }
 
 async function getData(mod: ModrinthMod) {
-    const res = await fetch('https://api.modrinth.com/v2/project/' + mod.slug + '/version');
+    const res = await cachedFetch('https://api.modrinth.com/v2/project/' + mod.slug + '/version');
     const versions = await res.json();
     // get latest stable version, if there is none, get latest version
     let version = versions.find((version: any) => {

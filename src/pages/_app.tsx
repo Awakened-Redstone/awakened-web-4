@@ -1,31 +1,12 @@
 import '@/styles/globals.css'
 import type {AppProps} from 'next/app'
 import {ThemeProvider} from "next-themes";
-import {
-    Button,
-    Divider,
-    Navbar,
-    NavbarBrand,
-    NavbarContent,
-    NavbarItem,
-    NextUIProvider,
-    Tooltip
-} from "@nextui-org/react";
-import {Inter} from 'next/font/google'
-import Logo from "@/components/Logo";
-import {link} from "@nextui-org/theme"
-import {SiModrinth} from "react-icons/si";
-import {GiHamburgerMenu} from "react-icons/gi";
-import {FaGithub, FaRegCopyright} from "react-icons/fa";
-import {HiExternalLink} from "react-icons/hi";
-import FabricLogo from "@/components/FabricLogo";
+import {Divider, NextUIProvider,} from "@nextui-org/react";
 import NextNProgress from 'nextjs-progressbar';
 import Head from "next/head";
-import Link from "next/link";
-import {Image} from "@nextui-org/image";
-import {defaultClasses, inter} from "@/system/utils";
+import {inter} from "@/system/utils";
 import classNames from "classnames";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {
     Action,
     KBarAnimator,
@@ -37,7 +18,6 @@ import {
     useMatches
 } from "kbar";
 import MainNavbar from "@/components/Navbar";
-import {useRouter} from "next/router";
 
 function RenderResults() {
     const {results} = useMatches();

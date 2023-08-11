@@ -5,12 +5,13 @@ import ModCard from "@/components/ModCard";
 import {ModrinthMod, PistonMeta} from "@/system/types";
 import {Skeleton} from "@nextui-org/react";
 import SpinningModrinthLogo from "@/components/SpinningModrinthLogo";
+import {cachedFetch} from "@/system/network";
 
 export const config = {runtime: 'experimental-edge'};
 
 async function getData() {
-    const modsRes = await fetch("https://api.modrinth.com/v2/user/awakened-redstone/projects")
-    const pistonMetaRes = await fetch("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")
+    const modsRes = await cachedFetch("https://api.modrinth.com/v2/user/awakened-redstone/projects")
+    const pistonMetaRes = await cachedFetch("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")
     const mods = await modsRes.json()
     const pistonMeta = await pistonMetaRes.json()
 

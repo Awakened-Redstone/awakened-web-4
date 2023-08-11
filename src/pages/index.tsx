@@ -24,6 +24,7 @@ import {Skeleton, Tooltip} from "@nextui-org/react";
 import "@egjs/flicking-plugins/dist/arrow.css";
 import "@egjs/react-flicking/dist/flicking.css";
 import {ModrinthMod} from "@/system/types";
+import {cachedFetch} from "@/system/network";
 
 export const config = {runtime: 'experimental-edge'};
 
@@ -38,9 +39,8 @@ export function getStaticProps(context: any) {
 }
 
 async function getData() {
-    const modsRes = await fetch("https://api.modrinth.com/v2/user/awakened-redstone/projects");
-    const mods = await modsRes.json();
-    return mods;
+    const modsRes = await cachedFetch("https://api.modrinth.com/v2/user/awakened-redstone/projects");
+    return await modsRes.json();
 }
 
 function calculateDownloads(mods: ModrinthMod[]) {
