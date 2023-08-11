@@ -43,6 +43,7 @@ export default function Mods() {
         <>
             <Head>
                 <title>Mods - Awakened Redstone</title>
+                <meta name="description" content="A list with all of Awakened Redstone's mods posted on Modrinth"/>
             </Head>
             <main className={styles.main}>
                 <div className={"grid gap-2 mod-cards max-w-[1380px] mx-auto"}>
