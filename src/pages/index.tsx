@@ -151,9 +151,7 @@ export default function Home() {
                             </div>
                             <div className={"h-full font-semibold text-center flex"}>
                                 <div className={"m-auto h-fit"}>
-                                    <Tooltip content={<div>& Frameworks</div>} showArrow offset={-1}>
-                                        <div className={"text-2xl"}>Languages</div>
-                                    </Tooltip>
+                                    <div className={"text-2xl"}>Languages</div>
                                     <div className={"text-3xl w-full inline-flex justify-center items-center align-middle"}>
                                         <FaJava/>&nbsp;
                                         <TbBrandTypescript/>&nbsp;
