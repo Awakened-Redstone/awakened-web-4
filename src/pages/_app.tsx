@@ -85,8 +85,6 @@ function Loading() {
 }
 
 export default function App({Component, pageProps}: AppProps) {
-    const [showMobileNav, setShowMobileNav] = React.useState(false);
-
     const kbarActions: Action[] = [
         {
             id: 'mods',
@@ -114,13 +112,12 @@ export default function App({Component, pageProps}: AppProps) {
                             </KBarPositioner>
                         </KBarPortal>
                         <Loading/>
-                        {pageProps.navless ? null : <MainNavbar setShowMobileNav={setShowMobileNav} showMobileNav={showMobileNav}/>}
+                        {pageProps.navless ? null : <MainNavbar/>}
                         <main
                             className={
                                 classNames({
                                     [`${inter.variable} font-base min-h-[60vh] overflow-x-hidden`]: true,
                                     ["px-4 pt-4"]: !pageProps.borderless,
-                                    ["hidden lmd:block"]: showMobileNav && !pageProps.navless,
                                 })
                             }
                         >
