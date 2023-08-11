@@ -138,18 +138,18 @@ export default function MainNavbar() {
                 position={"sticky"}
                 onMenuOpenChange={setIsMenuOpen}
                 classNames={{
-                    wrapper: "mt-4 rounded-xl shadow-medium",
+                    wrapper: "mt-4 rounded-xl shadow-medium mx-2 xl:mx-0",
                 }}
             >
-                <NavbarContent className={"lmd:hidden h-4"}>
-                    <NavbarMenuToggle
-                        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                        className="sm:hidden"
-                    />
-                </NavbarContent>
+                <NavbarMenuToggle
+                    aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                    className="lmd:hidden"
+                />
 
-                <NavbarBrand className={"xl:w-full w-fit sm:mr-0 mr-[-1rem]"}>
-                    <Link href={"/"} className={classes.navLinkContent}><Logo width={230} height={23}/></Link>
+                <NavbarBrand>
+                    <div className={"xl:w-full w-fit sm:mr-0 mr-[-1rem] ml-auto lmd:ml-0"}>
+                        <Link href={"/"} className={classes.navLinkContent}><Logo width={230} height={23}/></Link>
+                    </div>
                 </NavbarBrand>
 
                 <NavbarContent className={"hidden lmd:flex gap-1 !justify-center"}>
