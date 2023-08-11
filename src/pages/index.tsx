@@ -195,7 +195,7 @@ export default function Home() {
                             </div>
                             <div className={"h-full font-semibold text-center flex"}>
                                 <div className={"m-auto h-fit"}>
-                                    <div className={"text-2xl"}>Buy me a coffee</div>
+                                    <div className={"text-2xl"}>Support me</div>
                                     <div className={"text-3xl w-full inline-flex justify-center items-center align-middle"}>
                                         Donate
                                         <div className={"text-2xl absolute top-2 right-2"}><HiExternalLink/></div>
