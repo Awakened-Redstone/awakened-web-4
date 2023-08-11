@@ -7,19 +7,25 @@ import {SiDart, SiJetbrains, SiKofi, SiModrinth} from "react-icons/si";
 import {FaDiscord, FaGithub, FaJava, FaRegCopyright} from "react-icons/fa";
 import {
     TbAlertCircle,
-    TbBrandCss3, TbBrandFigma, TbBrandFlutter, TbBrandGit,
-    TbBrandHtml5, TbBrandJavascript,
-    TbBrandNextjs, TbBrandReact,
-    TbBrandTypescript, TbTools
+    TbBrandCss3,
+    TbBrandFigma,
+    TbBrandFlutter,
+    TbBrandGit,
+    TbBrandHtml5,
+    TbBrandJavascript,
+    TbBrandNextjs,
+    TbBrandReact,
+    TbBrandTypescript,
+    TbTools
 } from "react-icons/tb";
-import {HiExternalLink, HiCode} from "react-icons/hi";
+import {HiCode, HiExternalLink} from "react-icons/hi";
 import {BsGithub} from "react-icons/bs";
 import Link from "next/link";
 import React, {useEffect} from "react";
 import {defaultClasses, formatNumber} from "@/system/utils";
-import Flicking, { ViewportSlot } from "@egjs/react-flicking";
-import { Arrow, Perspective } from "@egjs/flicking-plugins";
-import {Skeleton, Tooltip} from "@nextui-org/react";
+import Flicking, {ViewportSlot} from "@egjs/react-flicking";
+import {Arrow, Perspective} from "@egjs/flicking-plugins";
+import {Tooltip} from "@nextui-org/react";
 
 import "@egjs/flicking-plugins/dist/arrow.css";
 import "@egjs/react-flicking/dist/flicking.css";
@@ -32,7 +38,7 @@ const classes = {
     navLinkContent: `${defaultClasses.navContent} ${defaultClasses.link}`
 }
 
-export function getStaticProps(context: any) {
+export function getStaticProps() {
     return {
         props: {navless: true, borderless: true}
     }
@@ -62,8 +68,8 @@ export default function Home() {
     }, [mods]);
 
     const _plugins = [
-        new Arrow(),
-        new Perspective({ rotate: -0.5, scale: 0.5, perspective: 1000 })
+        new Perspective({ rotate: -0.5, scale: 0.5, perspective: 1000 }),
+        new Arrow()
     ];
 
     return (
@@ -108,6 +114,7 @@ export default function Home() {
                         circular={false}
                         defaultIndex={2}
                         align={"center"}
+
                     >
                         <Link className={"relative w-[260px] h-[300px] bg-[#05CE45] rounded-2xl bg-opacity-50 flex flex-col hover:scale-[1.01] motion-reduce:transition-none"} draggable={false} href={"/mods"}>
                             <div className={"h-full flex"}>

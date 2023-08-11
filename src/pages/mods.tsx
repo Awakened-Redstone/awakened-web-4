@@ -3,7 +3,6 @@ import styles from '@/styles/Home.module.css'
 import React, {useEffect} from "react";
 import ModCard from "@/components/ModCard";
 import {ModrinthMod, PistonMeta} from "@/system/types";
-import {Skeleton} from "@nextui-org/react";
 import SpinningModrinthLogo from "@/components/SpinningModrinthLogo";
 import {cachedFetch} from "@/system/network";
 

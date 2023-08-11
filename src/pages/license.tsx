@@ -29,7 +29,7 @@ export default function License() {
                     <Button
                         id={"copy-license-button"}
                         onPress={() => {
-                            navigator.clipboard.writeText(license).then(r => {
+                            navigator.clipboard.writeText(license).then(() => {
                                 const selection = window.getSelection() as Selection;
                                 const headerElement = document.getElementById('license-content') as Element;
                                 selection.setBaseAndExtent(headerElement, 0, headerElement, 1);
