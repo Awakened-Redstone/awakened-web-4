@@ -1,4 +1,4 @@
-export default function SpinningModrinthLogo(props: { className?: string }) {
+export default function SpinningModrinthLogo() {
 
     return (
         <div className={`flex justify-center items-center mt-4 h-16`}>
@@ -43,6 +43,7 @@ export default function SpinningModrinthLogo(props: { className?: string }) {
                 </g>
             </svg>
             <svg
+                className={"w-20 h-20"}
                 width="100%"
                 height="100%"
                 viewBox="0 0 590 591"
