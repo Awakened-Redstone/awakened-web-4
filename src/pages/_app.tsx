@@ -69,7 +69,7 @@ export default function App({Component, pageProps}: AppProps) {
                                 </KBarAnimator>
                             </KBarPositioner>
                         </KBarPortal>
-                        <NextNProgress color={"#f00"} stopDelayMs={0} height={2} options={{ showSpinner: false, speed: 100 }}/>
+                        <NextNProgress color={"#d30808"} stopDelayMs={0} height={2} options={{ showSpinner: false, speed: 100 }}/>
                         {pageProps.navless ? null : <MainNavbar/>}
                         <main
                             className={
