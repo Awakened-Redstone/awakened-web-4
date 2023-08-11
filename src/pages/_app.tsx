@@ -19,6 +19,7 @@ import {GiHamburgerMenu} from "react-icons/gi";
 import {FaGithub, FaRegCopyright} from "react-icons/fa";
 import {HiExternalLink} from "react-icons/hi";
 import FabricLogo from "@/components/FabricLogo";
+import NextNProgress from 'nextjs-progressbar';
 import Head from "next/head";
 import Link from "next/link";
 import {Image} from "@nextui-org/image";
@@ -61,29 +62,6 @@ function RenderResults() {
     );
 }
 
-function Loading() {
-    const router = useRouter();
-
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        const handleStart = (url: string) => (url !== router.asPath) && setLoading(true);
-        const handleComplete = (url: string) => (url === router.asPath) && setLoading(false);
-
-        router.events.on('routeChangeStart', handleStart)
-        router.events.on('routeChangeComplete', handleComplete)
-        router.events.on('routeChangeError', handleComplete)
-
-        return () => {
-            router.events.off('routeChangeStart', handleStart)
-            router.events.off('routeChangeComplete', handleComplete)
-            router.events.off('routeChangeError', handleComplete)
-        }
-    })
-
-    return loading ? (<div>Loading....{/*I have an animation here*/}</div>) : null;
-}
-
 export default function App({Component, pageProps}: AppProps) {
     const kbarActions: Action[] = [
         {
@@ -111,7 +89,7 @@ export default function App({Component, pageProps}: AppProps) {
                                 </KBarAnimator>
                             </KBarPositioner>
                         </KBarPortal>
-                        <Loading/>
+                        <NextNProgress color={"#f00"} stopDelayMs={0} height={2} options={{ showSpinner: false, speed: 100 }}/>
                         {pageProps.navless ? null : <MainNavbar/>}
                         <main
                             className={
