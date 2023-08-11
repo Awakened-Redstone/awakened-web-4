@@ -30,7 +30,12 @@ export default function Mods() {
 
     if (!(mods && pistonMeta)) {
         return (
-            <SpinningModrinthLogo className={"w-[4rem]"}/>
+            <>
+                <div>
+                    <SpinningModrinthLogo/>
+                    <div className={"mx-auto mt-4 w-fit font-semibold text-[1.5rem]"}>Getting mods list</div>
+                </div>
+            </>
         );
     }
 
