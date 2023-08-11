@@ -9,29 +9,30 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@egjs/flicking-plugins": "^4.7.0",
-    "@egjs/react-flicking": "^4.10.9",
-    "@nextui-org/react": "^0.0.0-dev-v2-20230505232443",
-    "@types/node": "20.1.3",
-    "@types/react": "18.2.6",
-    "@types/react-dom": "18.2.4",
+    "@egjs/flicking-plugins": "^4.7.1",
+    "@egjs/react-flicking": "^4.11.0",
+    "@nextui-org/react": "^2.0.14",
+    "@types/node": "20.4.9",
+    "@types/react": "18.2.20",
+    "@types/react-dom": "18.2.7",
     "classnames": "^2.3.2",
-    "eslint": "8.40.0",
-    "eslint-config-next": "13.4.1",
+    "eslint": "8.47.0",
+    "eslint-config-next": "13.4.13",
     "kbar": "^0.1.0-beta.41",
-    "next": "13.4.1",
+    "next": "13.4.13",
     "next-themes": "^0.2.1",
+    "nextjs-progressbar": "^0.0.16",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.8.0",
-    "typescript": "5.0.4",
+    "react-icons": "^4.10.1",
+    "typescript": "5.1.6",
     "use-debounce": "^9.0.4"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.23",
+    "postcss": "^8.4.27",
     "raw-loader": "^4.0.2",
-    "tailwindcss": "^3.3.2"
+    "tailwindcss": "^3.3.3"
   }
 }
