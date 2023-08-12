@@ -79,7 +79,7 @@ export default function Home() {
             </Head>
             <main className={`${styles.main} max-w-[1400px] mx-auto`}>
                 <div className={"mx-auto w-fit mb-[3rem] mt-6"}>
-                    <Logo width={"auto"} height={"3rem"} className={"w-[80vw] mx-auto sm:w-auto"}/>
+                    <Logo className={"w-[80vw] mx-auto sm:w-auto h-12"}/>
                     <div className={"justify-center flex flex-wrap"}>
                         <Link href={"/mods"} className={`${classes.navLinkContent} text-xl`}>
                             <FabricLogo width={18.57145833333333} height={20}/>&nbsp;Mods

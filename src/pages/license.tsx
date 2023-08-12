@@ -45,7 +45,7 @@ export default function License() {
                     </Button>
                 </div>
                 <Card>
-                    <CardHeader className={"w-full text-[1.5rem] font-semibold border-b-1 border-solid"}>
+                    <CardHeader className={"w-full text-[1.5rem] font-semibold border-b border-solid"}>
                         <div className={"mx-auto w-fit"}>The license</div>
                     </CardHeader>
                     <CardBody className={"whitespace-pre-wrap"}>
