@@ -20,7 +20,22 @@ module.exports = {
         }
       },
       screens: {
-        'lmd': '864px',
+        'lmd': '920px',
+      },
+      fontSize: {
+        base: '1rem',
+        '1': '5.4rem',
+        '2': '3.6rem',
+        '3': '2.4rem',
+        '4': '1.8rem',
+        '5': '1.4rem',
+        '6': '1.3rem',
+        '7': '1.2rem',
+        '8': '1rem',
+        '9': '0.8rem',
+        '10': '0.6rem',
+        '11': '0.4rem',
+        'size-inherit': 'inherit',
       }
     },
   },

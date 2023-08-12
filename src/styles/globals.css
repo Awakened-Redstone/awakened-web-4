@@ -31,6 +31,10 @@ a {
   text-decoration: none;
 }
 
+.fake-nav-height {
+  --navbar-height: 0 !important;
+}
+
 .mod-cards {
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
 }
@@ -63,15 +67,6 @@ a {
   box-shadow:
           inset 0 0 300px #13C3FF,
           0 0 20px #13C3FF;
-}
-
-#__next > div[data-overlay-container] > nav > header {
-  background-color: #d7d9dc;
-  border: none;
-}
-
-#__next > div[data-overlay-container] > nav {
-  background-image: none;
 }
 
 .modrinth-rotate {
