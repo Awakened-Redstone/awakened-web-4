@@ -73,7 +73,7 @@ const items: MenuItem[] = [
     },
     {
         content: "Modrinth",
-        wrapper: buildDefaultWrapper("https://modrinth.com/user/AwakenedRedstone", true),
+        wrapper: buildDefaultWrapper("https://modrinth.com/user/Awakened-Redstone", true),
         key: "modrinth",
         prefix: <SiModrinth/>,
         suffix: <HiExternalLink/>,
