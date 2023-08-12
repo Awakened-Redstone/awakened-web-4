@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useTheme} from 'next-themes'
 import {HiSun} from "react-icons/hi"
 import {HiComputerDesktop} from "react-icons/hi2"
@@ -6,7 +6,7 @@ import {RiMoonClearFill} from "react-icons/ri"
 import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Selection} from "@nextui-org/react";
 import {inter} from "@/system/utils";
 
-export function ThemeToggle({panelClassName = 'mt-4'}): JSX.Element | null {
+export function ThemeToggle({className, showLabel}: {className?: string, showLabel?: boolean} = {showLabel: false}): React.ReactElement | null {
     let {theme, setTheme} = useTheme()
 
     const [mounted, setMounted] = useState(false)
@@ -30,9 +30,10 @@ export function ThemeToggle({panelClassName = 'mt-4'}): JSX.Element | null {
                 showArrow
             >
                 <DropdownTrigger>
-                    <button className={"rounded-full text-2xl p-[0.375rem] bg-[#d7d9dc] dark:bg-[#1b1d29] shadow-medium"}>
-                        <span className={"inline"}>
+                    <button className={className ?? "rounded-full text-2xl p-[0.375rem] bg-[#d7d9dc] dark:bg-[#1b1d29] shadow-medium"}>
+                        <span className={"flex items-center"}>
                             <ThemeIcon/>
+                            {showLabel && <>&nbsp;Change theme</>}
                         </span>
                     </button>
                 </DropdownTrigger>
@@ -73,8 +74,8 @@ export function ThemeToggle({panelClassName = 'mt-4'}): JSX.Element | null {
     )
 }
 
-function ThemeIcon(): JSX.Element | null {
-    let {theme, setTheme} = useTheme()
+function ThemeIcon(): React.ReactElement | null {
+    let {theme} = useTheme()
 
     switch (theme) {
         case 'light':

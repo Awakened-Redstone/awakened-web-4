@@ -24,6 +24,13 @@ const classes = {
     navLinkContent: `${defaultClasses.navContent} ${defaultClasses.link} text-size-inherit`
 }
 
+const backdropClasses: string = [
+    "supports-[backdrop-filter]:bg-background/80",
+    "dark:supports-[backdrop-filter]:bg-background/70",
+    "supports-[backdrop-filter]:backdrop-blur-md",
+    "supports-[backdrop-filter]:backdrop-saturate-150"
+].join(" ");
+
 function buildDefaultWrapper(href: string, external?: boolean): (content: React.ReactNode) => React.ReactNode {
     return (content: React.ReactNode) => {
         const component = (
@@ -147,7 +154,10 @@ export default function MainNavbar() {
                     ],
                     menuItem: [
                         "text-center items-center justify-center",
+                        "supports-[backdrop-filter]:bg-background/80",
                         "dark:supports-[backdrop-filter]:bg-background/70",
+                        "supports-[backdrop-filter]:backdrop-blur-md",
+                        "supports-[backdrop-filter]:backdrop-saturate-150",
                         "text-3xl shadow-medium h-auto",
                         "py-2 rounded-2xl",
                     ],
@@ -165,7 +175,7 @@ export default function MainNavbar() {
                 </NavbarBrand>
 
                 <NavbarContent className={"hidden lmd:flex gap-1 !justify-center"}>
-                    {items.map((item, index) => buildNavItem(item, NavbarItem))}
+                    {items.map((item) => buildNavItem(item, NavbarItem))}
                 </NavbarContent>
 
                 <NavbarContent className={"hidden lmd:flex !justify-end"}>
@@ -181,12 +191,28 @@ export default function MainNavbar() {
                         </Tooltip>
                     </NavbarItem>
                     <NavbarItem>
-                        <ThemeToggle panelClassName="mt-0"/>
+                        <ThemeToggle/>
                     </NavbarItem>
                 </NavbarContent>
 
                 <NavbarMenu className={"fake-nav-height"}>
-                    {items.map((item, index) => buildNavItem(item, NavbarMenuItem, true))}
+                    {items.map((item) => buildNavItem(item, NavbarMenuItem, true))}
+                    <div className={"my-3"}/>
+                    <NavbarMenuItem className={"rounded-xl py-[0.125rem] kofi-glow min-h-[3.25rem]"}>
+                        <Tooltip content={"Buy me a coffee"} showArrow placement={"bottom"}>
+                            <Link href={"https://ko-fi.com/awakenedredstone"} target={"_blank"} className={""}>
+                                <div className={`${classes.navLinkContent} !flex h-full justify-center items-center`}>
+                                    <Image src={"/assets/kofi_logo_nolabel.webp"} alt={"Donate at Ko-Fi"} width={24}
+                                           height={24} radius={"none"} className={"min-h-[1.5rem] min-w-[1.5rem]"}/>
+                                    &nbsp;Donate
+                                </div>
+                            </Link>
+                        </Tooltip>
+                    </NavbarMenuItem>
+                    <NavbarMenuItem className={"p-0 !bg-transparent shadow-none backdrop-blur-0"}>
+                        <ThemeToggle className={`rounded-xl font-semibold py-2 h-auto w-full flex flex-row justify-center items-center ${backdropClasses} shadow-medium`} showLabel/>
+                    </NavbarMenuItem>
+                    <div className={"my-2"}/>
                 </NavbarMenu>
             </Navbar>
         </>
