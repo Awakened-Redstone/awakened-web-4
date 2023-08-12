@@ -5,7 +5,6 @@ import {HiExternalLink} from "react-icons/hi";
 import {FaDiscord, FaGithub, FaRegCopyright} from "react-icons/fa";
 import {TbHome} from "react-icons/tb";
 import {
-    Button,
     Navbar,
     NavbarBrand,
     NavbarContent,
@@ -19,7 +18,6 @@ import {defaultClasses, inter} from "@/system/utils";
 import Logo from "@/components/Logo";
 import {Image} from "@nextui-org/image";
 import React from "react";
-import {TooltipProps} from "@nextui-org/tooltip/dist/tooltip";
 import {ThemeToggle} from "@/components/ThemeSwitcher";
 
 const classes = {

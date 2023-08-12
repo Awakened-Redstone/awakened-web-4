@@ -3,15 +3,7 @@ import {useTheme} from 'next-themes'
 import {HiSun} from "react-icons/hi"
 import {HiComputerDesktop} from "react-icons/hi2"
 import {RiMoonClearFill} from "react-icons/ri"
-import {
-    Button,
-    Dropdown, DropdownItem,
-    DropdownMenu,
-    DropdownTrigger,
-    Popover,
-    PopoverContent,
-    PopoverTrigger, Selection
-} from "@nextui-org/react";
+import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Selection} from "@nextui-org/react";
 import {inter} from "@/system/utils";
 
 export function ThemeToggle({panelClassName = 'mt-4'}): JSX.Element | null {
