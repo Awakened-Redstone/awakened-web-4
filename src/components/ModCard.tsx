@@ -3,9 +3,10 @@ import {Image} from "@nextui-org/image";
 import React, {useEffect} from "react";
 import {Skeleton, Tooltip} from "@nextui-org/react";
 import Link from "next/link";
-import {McVersion, ModrinthMod, PistonMeta} from "@/system/types";
+import {McVersion, ModrinthMod, ModrinthModVersion, PistonMeta} from "@/system/types";
 import {formatVersions} from "@/system/utils";
 import {cachedFetch} from "@/system/network";
+import {isEmpty} from "@nextui-org/shared-utils";
 
 export const runtime = 'edge';
 
@@ -35,17 +36,48 @@ async function getData(mod: ModrinthMod) {
     return version;
 }
 
-export default function ModCard({mod, pistonMeta}: {mod: ModrinthMod, pistonMeta: PistonMeta}) {
-    const [data, setData]: [any, any] = React.useState<ModrinthMod>(null as any);
+function getEnvironmentLabel(mod: ModrinthMod): React.ReactElement {
+    let icon = <Image src={"https://raw.githubusercontent.com/modrinth/knossos/master/assets/images/utils/globe.svg"} alt={"Support is unknown"} aria-hidden />;
+    let text = "Support is unknown";
+    if (mod.client_side === "optional" && mod.server_side === "optional") {
+        text = "Client or server";
+    } else if (mod.client_side === "required" && mod.server_side === "required") {
+        text = "Client and server";
+    } else if ((mod.client_side === "optional" || mod.client_side === "required") && (mod.server_side === "optional" || mod.server_side === "unsupported")) {
+        // eslint-disable-next-line jsx-a11y/alt-text
+        icon = <Image src={"https://raw.githubusercontent.com/modrinth/knossos/master/assets/images/utils/client.svg"} aria-hidden />;
+        text = "Client";
+    } else if ((mod.server_side === "optional" || mod.server_side === "required") && (mod.client_side === "optional" || mod.client_side === "unsupported")) {
+        // eslint-disable-next-line jsx-a11y/alt-text
+        icon = <Image src={"https://raw.githubusercontent.com/modrinth/knossos/master/assets/images/utils/server.svg"} aria-hidden />;
+        text = "Server";
+    } else if (mod.client_side === "unsupported" && mod.server_side === "unsupported") {
+        text = "Unsupported";
+    }
+
+    icon = React.cloneElement(icon, { alt: "Support: " + text });
+
+    return (
+        <></>
+        /*
+        <span className={"text-[#b0bac5] inline-flex"}>
+            {icon}
+            {text}
+        </span>*/
+    )
+}
+
+export default function ModCard({mod, pistonMeta}: { mod: ModrinthMod, pistonMeta: PistonMeta }) {
+    const [data, setData]: [any, any] = React.useState<ModrinthModVersion[]>([] as ModrinthModVersion[]);
     useEffect(() => {
         getData(mod).then((data) => {
             setData(data);
         });
     }, [mod, pistonMeta]);
 
-    if (!(data && mod && pistonMeta)) return (
+    if (!(!isEmpty(data) && mod && pistonMeta)) return (
         <Skeleton className={"rounded-xl"}>
-            <div className="w-[200px] h-[100px]">NextUI</div>
+            <div className="w-full h-[200px]">NextUI</div>
         </Skeleton>
     );
 
@@ -53,18 +85,41 @@ export default function ModCard({mod, pistonMeta}: {mod: ModrinthMod, pistonMeta
     const versions: string = formatVersions([...mod.game_versions], {...pistonMeta});
 
     return (
-        <Card className={"bg-white dark:bg-[#26292f] border-none hover:scale-[1.01] max-w-[calc(100vw-2rem)]"} as={Link} href={"https://modrinth.com/mod/" + mod.slug} target={"_blank"}>
+        <Card
+            className={"bg-white dark:bg-[#26292f] border-none hover:scale-[1.01] max-w-[calc(100vw-2rem)] block modrinth-card-shadow px-4 rounded-2xl"}
+            classNames={{body: "modrinth-card-grid inline-grid overflow-hidden h-full text-[#111827] dark:text-[#b0bac5]"}}
+            as={Link} href={"https://modrinth.com/mod/" + mod.slug} target={"_blank"}>
             <CardBody className={"w-full p-3"}>
-                <div className={"flex w-full h-full"}>
-                    <div className={"mr-4 my-auto"}>
-                        <Image className={"min-w-[4rem] min-h-[4rem] w-[4rem] h-[4rem] md:min-w-[6rem] md:min-h-[6rem] md:w-[6rem] md:h-[6rem]"} src={mod.icon_url ? mod.icon_url : "https://cdn-raw.modrinth.com/placeholder.svg"} alt={mod.title}/>
-                    </div>
-                    <div className={"flex flex-col justify-between mod-card-descver h-full"}>
-                        <div className={"h-fit font-bold text-[1.5rem] leading-5 mb-[4px]"}>{mod.title}</div>
-                        <div className={"h-full leading-5 mb-[6px] opacity-70"}>{mod.description}</div>
-                        <div className={"h-6 flex gap-2 mt-auto"}>
-                            <div className={"bg-brand-modrinth leading-6 rounded-[0.5rem] px-2"}>{data.version_number}</div>
-                            <Tooltip content={versions.toString()} placement={"top"} showArrow className={"break-normal max-w-[25rem]"}>
+                <Image className={"w-24 h-24 object-contain"} classNames={{wrapper: "rounded-[1.25rem] modrinth-card-area-icon mt-2 bg-[#434956] w-24 h-24 object-contain"}}
+                       src={mod.icon_url ? mod.icon_url : "https://cdn-raw.modrinth.com/placeholder.svg"} alt={mod.title}/>
+                <div className={"flex flex-row ml-3 mt-2 modrinth-card-area-title"}>
+                    <h2 className={"font-bold text-[1.25rem] text-[#1a202c] dark:text-[#ecf9fb]"}>{mod.title}</h2>
+                    <p>by Awakened-Redstone</p>
+                </div>
+                <p className={"leading-[1.15rem] modrinth-card-area-description "}>{mod.description}</p>
+                <div className={"modrinth-card-area-tags"}>
+                    {getEnvironmentLabel(mod)}
+                </div>
+                <div className={"modrinth-card-area-stats"}>
+                    <div className={"text-black dark:text-white bg-brand-modrinth leading-6 rounded-[0.5rem] px-2"}>{data.version_number}</div>
+                    <Tooltip content={versions.toString()} placement={"top"} showArrow
+                             className={"break-normal max-w-[25rem]"}>
+                        <div className={"text-black dark:text-white bg-brand-modrinth leading-6 rounded-[0.5rem] px-2 flex"}>
+                            {latest}
+                            <sup className={"leading-4 top-0"}>
+                                {mod.game_versions.length > 1 ? " +" + (mod.game_versions.length - 1) : ""}
+                            </sup>
+                        </div>
+                    </Tooltip>
+                </div>
+            </CardBody>
+        </Card>
+    );
+
+    /*
+    <div className={"bg-brand-modrinth leading-6 rounded-[0.5rem] px-2"}>{data.version_number}</div>
+                            <Tooltip content={versions.toString()} placement={"top"} showArrow
+                                     className={"break-normal max-w-[25rem]"}>
                                 <div className={"bg-brand-modrinth leading-6 rounded-[0.5rem] px-2 flex"}>
                                     {latest}
                                     <sup className={"leading-4 top-0"}>
@@ -72,10 +127,5 @@ export default function ModCard({mod, pistonMeta}: {mod: ModrinthMod, pistonMeta
                                     </sup>
                                 </div>
                             </Tooltip>
-                        </div>
-                    </div>
-                </div>
-            </CardBody>
-        </Card>
-    );
+    * */
 }

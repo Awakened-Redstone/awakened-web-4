@@ -66,3 +66,43 @@ export type ModrinthMod = {
         ordering: number,
     }[]
 }
+
+export type ModrinthModVersion = {
+    name: string,
+    version_number: string,
+    changelog?: string,
+    dependencies: ModrinthVersionDependency[],
+    game_versions: string[],
+    version_type: "release" | "beta" | "alpha",
+    loaders: string[],
+    featured: boolean,
+    status?: "approved" | "archived" | "draft" | "unlisted" | "scheduled" | "unknown",
+    requested_status?: "listed" | "archived" | "draft" | "unlisted",
+    id: string,
+    project_id: string,
+    author_id: string,
+    date_published: string,
+    downloads: number,
+    files: ModrinthVersionFile[],
+}
+
+export type ModrinthVersionDependency = {
+    version_id?: string,
+    project_id?: string,
+    file_name?: string,
+    dependency_type: "required" | "optional" | "incompatible" | "embedded",
+}
+
+export type ModrinthVersionFile = {
+    hashes: ModrinthVersionFileHashes,
+    url: string,
+    filename: string,
+    primary: boolean,
+    size: number,
+    file_type?: "required-resource-pack" | "optional-resource-pack",
+}
+
+export type ModrinthVersionFileHashes = {
+    sha512: string,
+    sha1: string,
+}

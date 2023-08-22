@@ -7,7 +7,7 @@ export const inter = Inter({
 })
 
 export const defaultClasses = {
-    navContent: "font-semibold hover:bg-black dark:hover:bg-[#aaaaaa10] px-[0.5rem] py-[0.15rem] rounded-full",
+    navContent: "font-semibold hover:bg-[#00000020] dark:hover:bg-[#aaaaaa10] px-[0.5rem] py-[0.15rem] rounded-full",
     link: "relative inline-flex items-center outline-none data-[focus-visible=true]:outline-none data-[focus-visible=true]:ring-2 data-[focus-visible=true]:ring-primary data-[focus-visible=true]:ring-offset-2 data-[focus-visible=true]:ring-offset-background data-[focus-visible=true]:dark:ring-offset-background-dark no-underline hover:opacity-80 transition-opacity text-base whitespace-nowrap box-border data-[active=true]:font-semibold",
 }
 

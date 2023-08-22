@@ -1,12 +1,10 @@
 import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
 import ModrinthLogo from '@/components/ModrinthLogo'
 import FabricLogo from "@/components/FabricLogo";
 import Logo from "@/components/Logo";
 import {SiDart, SiJetbrains, SiKofi, SiModrinth} from "react-icons/si";
 import {FaDiscord, FaGithub, FaJava, FaRegCopyright} from "react-icons/fa";
 import {
-    TbAlertCircle,
     TbBrandCss3,
     TbBrandFigma,
     TbBrandFlutter,
@@ -77,10 +75,10 @@ export default function Home() {
             <Head>
                 <title>Awakened Redstone</title>
             </Head>
-            <main className={`${styles.main} max-w-[1400px] mx-auto`}>
+            <main className={"max-w-[1400px] mx-auto"}>
                 <div className={"mx-auto w-fit mb-[3rem] mt-6"}>
                     <Logo className={"w-[80vw] mx-auto sm:w-auto h-12"}/>
-                    <div className={"justify-center flex flex-wrap"}>
+                    <div className={"justify-center flex flex-wrap mt-2"}>
                         <Link href={"/mods"} className={`${classes.navLinkContent} text-xl`}>
                             <FabricLogo width={18.57145833333333} height={20}/>&nbsp;Mods
                         </Link>
@@ -98,12 +96,6 @@ export default function Home() {
                                 <FaRegCopyright/>&nbsp;License
                             </div>
                         </Tooltip>
-                    </div>
-                </div>
-                <div className={"mt-[-2rem] mb-[2rem] w-[50%] flex items-center text-left mx-auto whitespace-break-spaces text-amber-600 font-semibold"}>
-                    <TbAlertCircle className={"text-4xl"}/>
-                    <div className={"pl-2"}>
-                        This is an early dev version of the website, it may not behave properly on all devices and browsers.
                     </div>
                 </div>
                 <div className={"mt-[-40px]"}>
@@ -157,13 +149,14 @@ export default function Home() {
                                         <TbBrandTypescript/>&nbsp;
                                         <TbBrandJavascript/>&nbsp;
                                         <TbBrandHtml5/>&nbsp;
-                                        <TbBrandCss3/>&nbsp;
+                                        {/*<TbBrandCss3/>&nbsp;*/}
                                     </div>
                                     <div className={"text-3xl w-full inline-flex justify-center items-center align-middle"}>
+                                        <TbBrandCss3/>&nbsp;
                                         <TbBrandReact/>&nbsp;
                                         <TbBrandNextjs/>&nbsp;
-                                        <TbBrandFlutter/>&nbsp;
-                                        <SiDart/>&nbsp;
+                                        {/*<TbBrandFlutter/>&nbsp;
+                                        <SiDart/>&nbsp;*/}
                                     </div>
                                 </div>
                             </div>

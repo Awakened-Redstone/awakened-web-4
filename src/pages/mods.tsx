@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
 import React, {useEffect} from "react";
 import ModCard from "@/components/ModCard";
 import {ModrinthMod, PistonMeta} from "@/system/types";
@@ -45,8 +44,8 @@ export default function Mods() {
                 <title>Mods - Awakened Redstone</title>
                 <meta name="description" content="A list with all of Awakened Redstone's mods posted on Modrinth"/>
             </Head>
-            <main className={styles.main}>
-                <div className={"grid gap-2 mod-cards max-w-[1380px] mx-auto"}>
+            <main>
+                <div className={"grid gap-2 mod-cards max-w-[1380px] mx-auto mb-4"}>
                     {mods.map((mod: ModrinthMod) => <ModCard mod={{...mod}} pistonMeta={{...pistonMeta}} key={mod.id}/>)}
                 </div>
             </main>

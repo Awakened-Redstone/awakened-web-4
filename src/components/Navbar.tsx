@@ -21,7 +21,8 @@ import React from "react";
 import {ThemeToggle} from "@/components/ThemeSwitcher";
 
 const classes = {
-    navLinkContent: `${defaultClasses.navContent} ${defaultClasses.link} text-size-inherit`
+    navLinkContent: `${defaultClasses.navContent} ${defaultClasses.link} text-size-inherit`,
+    mobileNavLinkContent: `${defaultClasses.link} hover:bg-[#aaaaaa10] font-semibold text-size-inherit w-full h-full py-2 rounded-2xl text-center justify-center items-center`,
 }
 
 const backdropClasses: string = [
@@ -31,10 +32,14 @@ const backdropClasses: string = [
     "supports-[backdrop-filter]:backdrop-saturate-150"
 ].join(" ");
 
-function buildDefaultWrapper(href: string, external?: boolean): (content: React.ReactNode) => React.ReactNode {
-    return (content: React.ReactNode) => {
+function getLinkClasses(mobile: boolean): string {
+    return mobile ? classes.mobileNavLinkContent : classes.navLinkContent
+}
+
+function buildDefaultWrapper(href: string, external?: boolean): (mobile: boolean, content: React.ReactNode) => React.ReactNode {
+    return (mobile: boolean, content: React.ReactNode) => {
         const component = (
-            <Link className={classes.navLinkContent} href={href}>
+            <Link className={getLinkClasses(mobile)} href={href}>
                 {content}
             </Link>
         )
@@ -48,7 +53,7 @@ function buildDefaultWrapper(href: string, external?: boolean): (content: React.
 
 interface MenuItem {
     content: string | React.ReactNode
-    wrapper?: (content: React.ReactNode) => React.ReactNode
+    wrapper?: (mobile: boolean, content: React.ReactNode) => React.ReactNode,
     key: string
     prefix?: React.ReactNode | ((mobile: boolean) => React.ReactNode)
     suffix?: React.ReactNode | ((mobile: boolean) => React.ReactNode)
@@ -95,9 +100,9 @@ const items: MenuItem[] = [
     },
     {
         content: "License",
-        wrapper: (content) => (
+        wrapper: (mobile, content) => (
             <Tooltip content={"🚧 In development"} showArrow placement={"bottom"}>
-                <div className={`${classes.navLinkContent}`}>
+                <div className={getLinkClasses(mobile)}>
                     {content}
                 </div>
             </Tooltip>
@@ -115,7 +120,7 @@ function buildNavItem(item: MenuItem, node: React.FunctionComponent<any>, mobile
 
     const createChildren = () => {
         const itemContent = <>{prefix}{prefix && <>&nbsp;</>}{item.content}{suffix && <>&nbsp;</>}{suffix}</>;
-        return item.wrapper ? item.wrapper(itemContent) : itemContent;
+        return item.wrapper ? item.wrapper(mobile, itemContent) : itemContent;
     };
 
     const component = React.createElement(node, {
@@ -144,22 +149,13 @@ export default function MainNavbar() {
                 position={"sticky"}
                 onMenuOpenChange={setIsMenuOpen}
                 classNames={{
-                    wrapper: "mt-4 rounded-xl shadow-medium mx-2 xl:mx-0",
-                    menu: [
-                        "pt-24",
-                        "supports-[backdrop-filter]:bg-background/80",
-                        "dark:supports-[backdrop-filter]:bg-background/50",
-                        "supports-[backdrop-filter]:backdrop-blur-md",
-                        "supports-[backdrop-filter]:backdrop-saturate-150",
-                    ],
+                    wrapper: "mt-4 rounded-xl shadow-medium mx-2 xl:mx-0 bg-[#f4f4f4] dark:bg-[#0e0f14]",
                     menuItem: [
                         "text-center items-center justify-center",
-                        "supports-[backdrop-filter]:bg-background/80",
-                        "dark:supports-[backdrop-filter]:bg-background/70",
-                        "supports-[backdrop-filter]:backdrop-blur-md",
-                        "supports-[backdrop-filter]:backdrop-saturate-150",
+                        "dark:bg-[#aaaaaa08]",
+                        "dark:hover:bg-[#aaaaaa1a]",
                         "text-3xl shadow-medium h-auto",
-                        "py-2 rounded-2xl",
+                        "rounded-2xl",
                     ],
                 }}
             >
@@ -179,10 +175,10 @@ export default function MainNavbar() {
                 </NavbarContent>
 
                 <NavbarContent className={"hidden lmd:flex !justify-end"}>
-                    <NavbarItem className={"rounded-full py-[0.125rem] kofi-glow hidden lg:flex"}>
+                    <NavbarItem className={"rounded-full kofi-glow hidden lg:flex"}>
                         <Tooltip content={"Buy me a coffee"} showArrow placement={"bottom"}>
-                            <Link href={"https://ko-fi.com/awakenedredstone"} target={"_blank"} className={""}>
-                                <div className={`${classes.navLinkContent} !flex`}>
+                            <Link href={"https://ko-fi.com/awakenedredstone"} target={"_blank"} className={`${classes.navLinkContent} h-full !py-1 dark:hover:bg-[#00000020] transition-background`}>
+                                <div className={"!flex"}>
                                     <Image src={"/assets/kofi_logo_nolabel.webp"} alt={"Donate at Ko-Fi"} width={24}
                                            height={24} radius={"none"} className={"min-h-[1.5rem] min-w-[1.5rem]"}/>
                                     &nbsp;Donate
@@ -196,12 +192,13 @@ export default function MainNavbar() {
                 </NavbarContent>
 
                 <NavbarMenu className={"fake-nav-height"}>
+                    <span className={"pt-20 bg-transparent"}/>
                     {items.map((item) => buildNavItem(item, NavbarMenuItem, true))}
                     <div className={"my-3"}/>
                     <NavbarMenuItem className={"rounded-xl py-[0.125rem] kofi-glow min-h-[3.25rem]"}>
                         <Tooltip content={"Buy me a coffee"} showArrow placement={"bottom"}>
                             <Link href={"https://ko-fi.com/awakenedredstone"} target={"_blank"} className={""}>
-                                <div className={`${classes.navLinkContent} !flex h-full justify-center items-center`}>
+                                <div className={`${classes.mobileNavLinkContent} !flex h-full justify-center items-center`}>
                                     <Image src={"/assets/kofi_logo_nolabel.webp"} alt={"Donate at Ko-Fi"} width={24}
                                            height={24} radius={"none"} className={"min-h-[1.5rem] min-w-[1.5rem]"}/>
                                     &nbsp;Donate
@@ -210,7 +207,7 @@ export default function MainNavbar() {
                         </Tooltip>
                     </NavbarMenuItem>
                     <NavbarMenuItem className={"p-0 !bg-transparent shadow-none backdrop-blur-0"}>
-                        <ThemeToggle className={`rounded-xl font-semibold py-2 h-auto w-full flex flex-row justify-center items-center ${backdropClasses} shadow-medium`} showLabel/>
+                        <ThemeToggle className={`${getLinkClasses(true)} rounded-xl font-semibold py-2 h-auto w-full flex flex-row justify-center items-center shadow-medium`} showLabel/>
                     </NavbarMenuItem>
                     <div className={"my-2"}/>
                 </NavbarMenu>
