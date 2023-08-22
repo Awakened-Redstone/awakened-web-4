@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import styles from '@/styles/Home.module.css'
 import {Card, CardBody, CardHeader} from "@nextui-org/card";
 import React from "react";
 import {Button} from "@nextui-org/react";
@@ -22,7 +21,7 @@ export default function License() {
                 <meta name="robots" content="noindex,nofollow"/>
             </Head>
 
-            <main className={`${styles.main} max-w-[1400px] mx-auto`}>
+            <main className={"max-w-[1400px] mx-auto"}>
                 <div className={"flex gap-2 mx-auto w-fit mb-2"}>
                     <Link href={"/files/license"}
                           download={"License"}><Button><FiDownload/>&nbsp;Download</Button></Link>
