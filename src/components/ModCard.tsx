@@ -99,7 +99,7 @@ export default function ModCard({mod, pistonMeta}: { mod: ModrinthMod, pistonMet
                     {getEnvironmentLabel(mod)}
                 </div>
                 <div className={"modrinth-card-area-stats"}>
-                    <Tooltip content={"Latest mod version"}>
+                    <Tooltip content={"Latest mod version"} showArrow>
                         <div className={"modrinth-card-area-stat gap-1 items-center"}>
                             <Package size={20} /> {data.version_number}
                         </div>
