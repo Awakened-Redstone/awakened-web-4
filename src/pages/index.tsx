@@ -1,9 +1,8 @@
 import Head from 'next/head'
 import ModrinthLogo from '@/components/ModrinthLogo'
-import FabricLogo from "@/components/FabricLogo";
 import Logo from "@/components/Logo";
-import {SiDart, SiJetbrains, SiKofi, SiModrinth} from "react-icons/si";
-import {FaDiscord, FaGithub, FaJava, FaRegCopyright} from "react-icons/fa";
+import {SiDart, SiJetbrains, SiKofi,} from "react-icons/si";
+import {FaJava} from "react-icons/fa";
 import {
     TbBrandCss3,
     TbBrandFigma,
@@ -20,21 +19,17 @@ import {HiCode, HiExternalLink} from "react-icons/hi";
 import {BsGithub} from "react-icons/bs";
 import Link from "next/link";
 import React, {useEffect} from "react";
-import {defaultClasses, formatNumber} from "@/system/utils";
+import {formatNumber} from "@/system/utils";
 import Flicking, {ViewportSlot} from "@egjs/react-flicking";
 import {Arrow, Perspective} from "@egjs/flicking-plugins";
-import {Tooltip} from "@nextui-org/react";
 
 import "@egjs/flicking-plugins/dist/arrow.css";
 import "@egjs/react-flicking/dist/flicking.css";
 import {ModrinthMod} from "@/system/types";
 import {cachedFetch} from "@/system/network";
+import {buildNavSection, Div, navItems} from "@/components/Navbar";
 
 export const config = {runtime: 'experimental-edge'};
-
-const classes = {
-    navLinkContent: `${defaultClasses.navContent} ${defaultClasses.link}`
-}
 
 export function getStaticProps() {
     return {
@@ -55,8 +50,18 @@ function calculateDownloads(mods: ModrinthMod[]) {
     return downloads;
 }
 
+function NavDiv({...props}) {
+    return <Div {...props} className={`${props.className ?? ""} text-xl`}/>
+}
+
 export default function Home() {
     const [mods, setMods]: [ModrinthMod[], any] = React.useState<ModrinthMod[]>(null as any);
+    const [loaded, setLoaded]: [boolean, any] = React.useState<boolean>(false);
+
+    useEffect(() => {
+        if (loaded) return;
+        setLoaded(true);
+    }, [loaded]);
 
     useEffect(() => {
         if (mods) return;
@@ -64,6 +69,10 @@ export default function Home() {
             setMods(data);
         });
     }, [mods]);
+
+    if (!loaded) {
+        return null;
+    }
 
     const _plugins = [
         new Perspective({ rotate: -0.5, scale: 0.5, perspective: 1000 }),
@@ -79,26 +88,12 @@ export default function Home() {
                 <div className={"mx-auto w-fit mb-[3rem] mt-6"}>
                     <Logo className={"w-[80vw] mx-auto sm:w-auto h-12"}/>
                     <div className={"justify-center flex flex-wrap mt-2"}>
-                        <Link href={"/mods"} className={`${classes.navLinkContent} text-xl`}>
-                            <FabricLogo width={18.57145833333333} height={20}/>&nbsp;Mods
-                        </Link>
-                        <a className={`${classes.navLinkContent} text-brand-modrinth text-xl`} href={"https://modrinth.com/user/Awakened-Redstone"} target={"_blank"}>
-                            <SiModrinth/>&nbsp;Modrinth&nbsp;<HiExternalLink/>
-                        </a>
-                        <a className={`${classes.navLinkContent} text-xl`} href={"https://github.com/Awakened-Redstone"} target={"_blank"}>
-                            <FaGithub/>&nbsp;Github&nbsp;<HiExternalLink/>
-                        </a>
-                        <a className={`${classes.navLinkContent} text-xl`} href={"https://discord.gg/MTqsjwMpN2"} target={"_blank"}>
-                            <FaDiscord/>&nbsp;Discord&nbsp;<HiExternalLink/>
-                        </a>
-                        <Tooltip content={"🚧 In development"} showArrow placement={"bottom"}>
-                            <div className={`${defaultClasses.link} px-[0.5rem] py-[0.15rem] opacity-50 hover:opacity-50 cursor-no-drop text-xl`}>
-                                <FaRegCopyright/>&nbsp;License
-                            </div>
-                        </Tooltip>
+                        <div className={"justify-center flex flex-wrap mt-2"}>
+                            {navItems.map((item) => buildNavSection(item, NavDiv))}
+                        </div>
                     </div>
                 </div>
-                <div className={"mt-[-40px]"}>
+                <div className={"mt-[-2rem] mb-4"}>
                     <Flicking
                         cameraClass={"flex flex-row items-center mx-auto min-h-[360px] relative"}
                         plugins={_plugins}
@@ -106,9 +101,8 @@ export default function Home() {
                         circular={false}
                         defaultIndex={2}
                         align={"center"}
-
                     >
-                        <Link className={"relative w-[260px] h-[300px] bg-[#05CE45] rounded-2xl bg-opacity-50 flex flex-col hover:scale-[1.01] motion-reduce:transition-none"} draggable={false} href={"/mods"}>
+                        <Link className={"relative w-[260px] h-[300px] bg-[#05CE45] rounded-2xl bg-opacity-50 flex flex-col"} draggable={false} href={"/minecraft/mods"}>
                             <div className={"h-full flex"}>
                                 <div className={"mt-auto w-full h-fit"}>
                                     <ModrinthLogo className={"dropShadow mx-auto w-auto h-[8rem]"}/>
@@ -116,12 +110,12 @@ export default function Home() {
                             </div>
                             <div className={"h-full font-semibold text-center flex"}>
                                 <div className={"m-auto h-fit"}>
-                                    <div className={"text-2xl"}>Downloads</div>
+                                    <div className={"text-2xl"}>Mod downloads</div>
                                     <div className={"text-5xl"}>{mods ? formatNumber(calculateDownloads(mods)) : "???"}</div>
                                 </div>
                             </div>
                         </Link>
-                        <a className={"relative w-[260px] h-[300px] bg-[#6E5494] rounded-2xl bg-opacity-50 flex flex-col hover:scale-[1.01] motion-reduce:transition-none"} draggable={false} href={"https://github.com/Awakened-Redstone?tab=repositories"} target="_blank">
+                        <a className={"relative w-[260px] h-[300px] bg-[#6E5494] rounded-2xl bg-opacity-50 flex flex-col"} draggable={false} href={"https://github.com/Awakened-Redstone?tab=repositories"} target="_blank">
                             <div className={"h-full flex"}>
                                 <div className={"mt-auto w-full h-fit"}>
                                     <BsGithub className={"dropShadow text-[8rem] mx-auto"}/>
@@ -135,7 +129,7 @@ export default function Home() {
                                 </div>
                             </div>
                         </a>
-                        <div className={"relative w-[260px] h-[300px] bg-[#AE6565] rounded-2xl bg-opacity-50 flex flex-col hover:scale-[1.01] motion-reduce:transition-none cursor-default"}>
+                        <div className={"relative w-[260px] h-[300px] bg-[#AE6565] rounded-2xl bg-opacity-50 flex flex-col cursor-default"}>
                             <div className={"h-full flex"}>
                                 <div className={"mt-auto w-full h-fit"}>
                                     <HiCode className={"dropShadow text-[8rem] mx-auto"}/>
@@ -149,14 +143,14 @@ export default function Home() {
                                         <TbBrandTypescript/>&nbsp;
                                         <TbBrandJavascript/>&nbsp;
                                         <TbBrandHtml5/>&nbsp;
-                                        {/*<TbBrandCss3/>&nbsp;*/}
+                                        <TbBrandCss3/>&nbsp;
                                     </div>
                                     <div className={"text-3xl w-full inline-flex justify-center items-center align-middle"}>
-                                        <TbBrandCss3/>&nbsp;
+                                        {/*<TbBrandCss3/>&nbsp;*/}
                                         <TbBrandReact/>&nbsp;
                                         <TbBrandNextjs/>&nbsp;
-                                        {/*<TbBrandFlutter/>&nbsp;
-                                        <SiDart/>&nbsp;*/}
+                                        <TbBrandFlutter/>&nbsp;
+                                        <SiDart/>&nbsp;
                                     </div>
                                 </div>
                             </div>
@@ -200,6 +194,22 @@ export default function Home() {
                             <span className="flicking-arrow-next"></span>
                         </ViewportSlot>
                     </Flicking>
+
+                    {/*<div className={"max-w-3xl mx-auto mt-5"}>
+                        <div className={"bg-black/30 p-4 mx-4 md:mx-0 rounded-xl drop-shadow-md"}>
+                            The website is not complete and may change at any time. <br/>
+                            TODO:
+                            <ul className={"list-disc list-inside pl-4"}>
+                                <li className={"line-through"}>Separate the navigation in categories</li>
+                                <li className={"line-through"}>Fix the mobile navigation as it is likely broken due to the item above</li>
+                                <li className={"line-through"}>Make the home nav dynamic</li>
+                                <li>Finish the about page</li>
+                                <li>Use the proper Modrinth™ style on the mods page</li>
+                                <li>Add documentation pages</li>
+                                <li>Finish the home page</li>
+                            </ul>
+                        </div>
+                    </div>*/}
                 </div>
             </main>
         </>

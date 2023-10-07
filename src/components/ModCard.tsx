@@ -7,7 +7,7 @@ import {McVersion, ModrinthMod, ModrinthModVersion, PistonMeta} from "@/system/t
 import {formatVersions} from "@/system/utils";
 import {cachedFetch} from "@/system/network";
 import {isEmpty} from "@nextui-org/shared-utils";
-import {Box, Globe, HardDrive, History, Monitor, Package} from "lucide-react";
+import {LuBox, LuGlobe, LuHardDrive, LuMonitor, LuPackage} from "react-icons/lu";
 
 export const runtime = 'edge';
 
@@ -38,7 +38,7 @@ async function getData(mod: ModrinthMod) {
 }
 
 function getEnvironmentLabel(mod: ModrinthMod): React.ReactElement {
-    let icon = <Globe size={16} aria-hidden/>;
+    let icon = <LuGlobe size={16} aria-hidden/>;
     let text = "Support is unknown";
     if (mod.client_side === "optional" && mod.server_side === "optional") {
         text = "Client or server";
@@ -46,11 +46,11 @@ function getEnvironmentLabel(mod: ModrinthMod): React.ReactElement {
         text = "Client and server";
     } else if ((mod.client_side === "optional" || mod.client_side === "required") && (mod.server_side === "optional" || mod.server_side === "unsupported")) {
         // eslint-disable-next-line jsx-a11y/alt-text
-        icon = <Monitor size={16} aria-hidden/>;
+        icon = <LuMonitor size={16} aria-hidden/>;
         text = "Client";
     } else if ((mod.server_side === "optional" || mod.server_side === "required") && (mod.client_side === "optional" || mod.client_side === "unsupported")) {
         // eslint-disable-next-line jsx-a11y/alt-text
-        icon = <HardDrive size={16} aria-hidden/>;
+        icon = <LuHardDrive size={16} aria-hidden/>;
         text = "Server";
     } else if (mod.client_side === "unsupported" && mod.server_side === "unsupported") {
         text = "Unsupported";
@@ -88,7 +88,7 @@ export default function ModCard({mod, pistonMeta}: { mod: ModrinthMod, pistonMet
             classNames={{body: "modrinth-card-grid inline-grid overflow-hidden h-full text-[#111827] dark:text-[#b0bac5]"}}
             as={Link} href={"https://modrinth.com/mod/" + mod.slug} target={"_blank"}>
             <CardBody className={"w-full p-3 leading-[1.15rem]"}>
-                <Image className={"w-24 h-24 object-contain"} classNames={{wrapper: "rounded-[1.25rem] modrinth-card-area-icon mt-2 bg-[#434956] w-24 h-24 object-contain"}}
+                <Image className={"w-24 h-24 object-contain"} classNames={{wrapper: "rounded-[1.25rem] modrinth-card-area-icon mt-2 bg-[#e5e7eb] dark:bg-[#434956] w-24 h-24 object-contain"}}
                        src={mod.icon_url ? mod.icon_url : "https://cdn-raw.modrinth.com/placeholder.svg"} alt={mod.title}/>
                 <div className={"flex flex-row ml-3 mt-2 modrinth-card-area-title"}>
                     <h2 className={"font-bold text-[1.25rem] text-[#1a202c] dark:text-[#ecf9fb]"}>{mod.title}</h2>
@@ -101,14 +101,14 @@ export default function ModCard({mod, pistonMeta}: { mod: ModrinthMod, pistonMet
                 <div className={"modrinth-card-area-stats"}>
                     <Tooltip content={"Latest mod version"} showArrow>
                         <div className={"modrinth-card-area-stat gap-1 items-center"}>
-                            <Package size={20} /> {data.version_number}
+                            <LuPackage size={20} /> {data.version_number}
                         </div>
                     </Tooltip>
                     <Tooltip content={"Supported Minecraft versions: " + versions.toString()} placement={"top"} showArrow className={"break-normal max-w-[25rem]"}
                              aria-label={"All minecraft versions the mod supports"}>
                         <div className={"modrinth-card-area-stat"}>
                             <span className={"inline-flex items-center gap-1"}>
-                                <Box size={20} />{latest}
+                                <LuBox size={20} />{latest}
                             </span>
                             <sup className={"leading-4 top-0"}>
                                 {mod.game_versions.length > 1 ? " +" + (mod.game_versions.length - 1) : ""}
@@ -121,10 +121,10 @@ export default function ModCard({mod, pistonMeta}: { mod: ModrinthMod, pistonMet
     );
 
     /*
-    <div className={"bg-brand-modrinth leading-6 rounded-[0.5rem] px-2"}>{data.version_number}</div>
+    <div className={"bg-modrinth-brand leading-6 rounded-[0.5rem] px-2"}>{data.version_number}</div>
                             <Tooltip content={versions.toString()} placement={"top"} showArrow
                                      className={"break-normal max-w-[25rem]"}>
-                                <div className={"bg-brand-modrinth leading-6 rounded-[0.5rem] px-2 flex"}>
+                                <div className={"bg-modrinth-brand leading-6 rounded-[0.5rem] px-2 flex"}>
                                     {latest}
                                     <sup className={"leading-4 top-0"}>
                                         {mod.game_versions.length > 1 ? " +" + (mod.game_versions.length - 1) : ""}

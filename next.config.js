@@ -1,17 +1,12 @@
+const path = require('path')
+
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    webpack: (config, options) => {
-        config.module.rules.push({
-            test: /license$/,
-            use: 'raw-loader',
-        });
-        config.module.rules.push({
-            test: /\.txt$/,
-            use: 'raw-loader',
-        });
-        return config;
-    }
+    sassOptions: {
+        includePaths: [path.join(__dirname, 'styles')],
+    },
 }
 
 module.exports = nextConfig

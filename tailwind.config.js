@@ -4,7 +4,7 @@ const { nextui } = require("@nextui-org/theme/plugin");
 module.exports = {
   darkMode: "class",
   content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,md,mdx}",
     "node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
@@ -15,12 +15,17 @@ module.exports = {
     },
     extend: {
       colors: {
-        brand: {
-          modrinth: "#00af5c"
+        modrinth: {
+          brand: "#00af5c",
+          "raised-bg-dark": "#26292f",
+          "raised-bg-light": "#fff",
         }
       },
       screens: {
         'lmd': '920px',
+      },
+      transitionProperty: {
+        'fade': 'background, color, opacity',
       },
       fontSize: {
         base: '1rem',

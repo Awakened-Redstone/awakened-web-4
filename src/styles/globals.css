@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
- background-color: #e5e7eb;
+  background-color: #e5e7eb;
 
-  --color-brand-modrinth: theme('colors.brand.modrinth');
+  --color-modrinth-brand: theme('colors.modrinth.brand');
 }
 
 :root.dark {
@@ -52,13 +52,12 @@ a {
 }
 
 .kofi-glow {
-  box-shadow:
-          inset 0 0 300px #13C3FF,
-          0 0 20px #13C3FF;
+  box-shadow: inset 0 0 300px #13C3FF,
+  0 0 20px #13C3FF;
 }
 
 .modrinth-card-shadow {
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px 0px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 2px 4px 0;
 }
 
 .modrinth-card-grid {
@@ -125,11 +124,99 @@ a {
   animation: modrinth-rotate 3s infinite linear reverse;
 }
 
+.fancy-underline {
+  position: relative;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fancy-underline:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: currentColor;
+    transform-origin: top;
+    transition: transform 0.25s ease-out;
+  }
+
+  .fancy-underline:hover:after {
+    transform: scaleX(1);
+    transform-origin: top;
+  }
+}
+
 @keyframes modrinth-rotate {
   0% {
     transform: rotate(0);
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@layer utilities {
+  .modrinth {
+    --gap-xs: 0.25rem;
+    --gap-sm: 0.5rem;
+    --gap-md: 0.75rem;
+    --gap-lg: 1rem;
+    --gap-xl: 1.5rem;
+
+    --radius-xs: 0.25rem;
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.25rem;
+    --radius-max: 999999999px;
+
+    --shadow-card: rgba(50, 50, 100, 0.1) 0px 2px 4px 0px;
+
+    --color-text: hsl(221, 39%, 11%);
+    --color-button-bg: hsl(220, 13%, 91%);
+    --color-raised-bg: #ffffff;
+    --color-contrast: #1a202c;
+    --color-heading: #2c313d;
+    --color-text-dark: #1a202c;
+
+    --color-ad: #d6e6f9;
+
+    --color-blue: #1f68c0;
+    --color-special-orange: #e08325;
+    --color-special-blue: #1f68c0;
+
+    --color-warning-banner-text: hsl(0, 11%, 16%);
+    --color-warning-banner-bg: hsl(0, 100%, 95%);
+    --color-warning-banner-side: hsl(357, 78%, 40%);
+
+    --color-info-banner-text: var(--color-text);
+    --color-info-banner-bg: var(--color-ad);
+    --color-info-banner-side: var(--color-special-blue);
+  }
+
+  .modrinth-dark {
+    --shadow-card: rgba(0, 0, 0, 0.25) 0px 2px 4px 0px;
+
+    --color-text: var(--dark-color-text);
+    --color-raised-bg: #26292f;
+    --color-button-bg: hsl(222, 13%, 30%);
+    --color-contrast: var(--dark-color-contrast);
+    --color-heading: #c4cfdd;
+    --color-text-dark: #ecf9fb;
+
+    --color-ad: #1f324a;
+
+    --color-blue: #4f9cff;
+    --color-special-orange: #ffa347;
+    --color-special-blue: #4f9cff;
+
+    --color-warning-bg: hsl(355, 70%, 20%);
+    --color-warning-text: hsl(342, 70%, 75%);
+
+    --color-warning-banner-text: hsl(0, 100%, 96%);
+    --color-warning-banner-bg: hsl(356, 18%, 18%);
+    --color-warning-banner-side: hsl(357, 78%, 40%);
   }
 }

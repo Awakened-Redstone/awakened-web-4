@@ -6,9 +6,20 @@ export const inter = Inter({
     variable: '--font-inter',
 })
 
+export const baseClasses = {
+    navContentBase: "font-semibold",
+    navContentSpacing: "px-[0.5rem] py-[0.15rem]",
+    navContentHover: "hover:bg-[#00000020] dark:hover:bg-[#aaaaaa10]",
+    navItem: "text-medium whitespace-nowrap box-border list-none data-[active=true]:font-semibold",
+    navMenuItem: "text-medium whitespace-nowrap box-border list-none data-[active=true]:font-semibold",
+    link: "relative inline-flex items-center outline-none data-[focus-visible=true]:outline-none data-[focus-visible=true]:ring-2 data-[focus-visible=true]:ring-primary data-[focus-visible=true]:ring-offset-2 data-[focus-visible=true]:ring-offset-background data-[focus-visible=true]:dark:ring-offset-background-dark no-underline text-base whitespace-nowrap box-border data-[active=true]:font-semibold motion-reduce:hover:transform-none",
+    dropdownItem: "flex group items-center justify-between relative px-2 py-1.5 w-full h-full box-border rounded-small cursor-pointer tap-highlight-transparent data-[pressed=true]:opacity-70 outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 data-[focus-visible=true]:dark:ring-offset-background-content1 data-[hover=true]:bg-default data-[hover=true]:text-default-foreground gap-4 motion-reduce:hover:transform-none",
+}
+
 export const defaultClasses = {
-    navContent: "font-semibold hover:bg-[#00000020] dark:hover:bg-[#aaaaaa10] px-[0.5rem] py-[0.15rem] rounded-full",
-    link: "relative inline-flex items-center outline-none data-[focus-visible=true]:outline-none data-[focus-visible=true]:ring-2 data-[focus-visible=true]:ring-primary data-[focus-visible=true]:ring-offset-2 data-[focus-visible=true]:ring-offset-background data-[focus-visible=true]:dark:ring-offset-background-dark no-underline hover:opacity-80 transition-opacity text-base whitespace-nowrap box-border data-[active=true]:font-semibold",
+    navContent: `${baseClasses.navContentBase} ${baseClasses.navContentSpacing} ${baseClasses.navContentHover}`,
+    navContentRounded: `${baseClasses.navContentBase} ${baseClasses.navContentSpacing} ${baseClasses.navContentHover} rounded-full`,
+    link: `${baseClasses.link} hover:opacity-80`,
 }
 
 export function formatNumber(number: number, abbreviate: boolean = true): string {
@@ -96,4 +107,45 @@ export function formatVersions(versionArray: string[], pistonMeta: PistonMeta): 
     }
 
     return (output.length === 0 ? versionArray : output).join(', ')
+}
+
+export function capitalizeString(name: string): string {
+    return name ? name.charAt(0).toUpperCase() + name.slice(1) : name
+}
+
+export function formatCategory(name: string): string {
+    switch (name) {
+        case 'modloader':
+            return "Risugami's ModLoader"
+        case 'bungeecord':
+            return 'BungeeCord'
+        case 'liteloader':
+            return 'LiteLoader'
+        case 'game-mechanics':
+            return 'Game Mechanics'
+        case 'worldgen':
+            return 'World Generation'
+        case 'core-shaders':
+            return 'Core Shaders'
+        case 'gui':
+            return 'GUI'
+        case '8x-':
+            return '8x or lower'
+        case '512x+':
+            return '512x or higher'
+        case 'kitchen-sink':
+            return 'Kitchen Sink'
+        case 'path-tracing':
+            return 'Path Tracing'
+        case 'pbr':
+            return 'PBR'
+        case 'datapack':
+            return 'Data Pack'
+        case 'colored-lighting':
+            return 'Colored Lighting'
+        case 'optifine':
+            return 'OptiFine'
+    }
+
+    return capitalizeString(name)
 }

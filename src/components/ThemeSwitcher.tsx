@@ -3,10 +3,19 @@ import {useTheme} from 'next-themes'
 import {HiSun} from "react-icons/hi"
 import {HiComputerDesktop} from "react-icons/hi2"
 import {RiMoonClearFill} from "react-icons/ri"
-import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Selection} from "@nextui-org/react";
+import {
+    Button,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownTrigger, Selection
+} from "@nextui-org/react";
 import {inter} from "@/system/utils";
 
-export function ThemeToggle({className, showLabel}: {className?: string, showLabel?: boolean} = {showLabel: false}): React.ReactElement | null {
+export function ThemeToggle({className, showLabel}: {
+    className?: string,
+    showLabel?: boolean
+} = {showLabel: false}): React.ReactElement | null {
     let {theme, setTheme} = useTheme()
 
     const [mounted, setMounted] = useState(false)
@@ -24,20 +33,25 @@ export function ThemeToggle({className, showLabel}: {className?: string, showLab
     return (
         <>
             <Dropdown
+                key={"theme-dropdown"}
                 placement={"bottom"}
-                backdrop={"opaque"}
+                //backdrop={"opaque"} //Disabled due to bug on NextUI
                 className={`${inter.variable} font-base p-2`}
                 showArrow
             >
                 <DropdownTrigger>
-                    <button className={className ?? "rounded-full text-2xl p-[0.375rem] bg-[#d7d9dc] dark:bg-[#1b1d29] shadow-medium"}>
+                    <Button
+                        isIconOnly={!showLabel} disableRipple variant={"flat"}
+                        className={className ?? "rounded-full text-2xl p-[0.375rem] bg-[#d7d9dc] dark:bg-[#1b1d29] shadow-medium"}
+                    >
                         <span className={"flex items-center"}>
                             <ThemeIcon/>
                             {showLabel && <>&nbsp;Change theme</>}
                         </span>
-                    </button>
+                    </Button>
                 </DropdownTrigger>
                 <DropdownMenu
+                    key={"theme-dropdown-menu"}
                     selectedKeys={new Set([theme || 'system'])}
                     selectionMode={"single"}
                     className={"font-semibold"}
@@ -61,7 +75,6 @@ export function ThemeToggle({className, showLabel}: {className?: string, showLab
                         title={"Dark"}
                         className={"py-[0.5rem] pl-[1rem]"}
                     />
-
                     <DropdownItem
                         key={"system"}
                         startContent={<HiComputerDesktop className={iconClasses}/>}

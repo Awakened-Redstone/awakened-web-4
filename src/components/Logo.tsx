@@ -148,7 +148,7 @@ export default function Logo(props: { width?: number | string, height?: number |
     id="image309"
     x="240"
     y="316" /></g>
-                <g aria-label="Awakened Redstone" transform="scale(1.006278,0.99376117)" fill="currentColor"><path
+                <g transform="scale(1.006278,0.99376117)" fill="currentColor"><path
     d="m 29.385155,12.552789 h -2.679788 l -0.69526,-2.03178 h -3.726054 l -0.69526,2.03178 H 18.976505 L 22.689059,2.5018936 h 2.983543 z M 25.382348,8.6782328 24.14708,5.0736807 22.911812,8.6782328 Z"
     id="path415" />
                     <path

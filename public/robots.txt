@@ -1,12 +1,7 @@
-# Block all crawlers for /accounts
+# Block all crawlers for static assets
 User-agent: *
-Disallow: /license
 Disallow: /assets/*
 Disallow: /files/*
 
 User-agent: GPTBot
 Disallow: /
-
-# Allow all crawlers
-User-agent: *
-Allow: /
