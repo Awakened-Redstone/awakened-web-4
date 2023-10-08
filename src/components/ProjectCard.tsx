@@ -270,7 +270,7 @@ const ProjectCard = function ({children, type = 'mod', name = "Unknown project",
                     {
                         showUpdatedDate ? (
                             <Tooltip content={updatedDate()} showArrow>
-                                <div className={`${mr["stat"]} ${mr["date"]}`}>
+                                <div className={`!hidden sm:!flex ${mr["stat"]} ${mr["date"]}`}>
                                     <LuEdit aria-hidden="true"/>
                                     <span className={mr["date-label"]}>Updated </span>{sinceUpdated()}
                                 </div>

@@ -7,6 +7,8 @@ import SpinningModrinthLogo from "@/components/SpinningModrinthLogo";
 import {cachedFetch} from "@/system/network";
 import ProjectCard from "@/components/ProjectCard";
 import Link from "next/link";
+import {TbInfoCircle} from "react-icons/tb";
+import {FaExclamationTriangle} from "react-icons/fa";
 
 export const config = {runtime: 'experimental-edge'};
 
@@ -48,9 +50,31 @@ export default function Mods() {
                 <meta name="description" content="A list with all of Awakened Redstone's mods posted on Modrinth"/>
             </Head>
             <main>
-                <div className={`grid gap-2 mod-cards max-w-[1380px] mx-auto mb-4 modrinth dark:modrinth-dark ${mr["display-mode--grid"]}`}>
-                    {/*{mods.map((mod: ModrinthMod) => <ModCard mod={{...mod}} pistonMeta={{...pistonMeta}} key={mod.id}/>)}*/}
+                <div className={`flex gap-2 xsm:hidden items-center bg-red-700/20 dark:bg-red-700/10 mx-auto text-left p-4 rounded-xl drop-shadow-md leading-6 w-full dark:text-red-600 text-red-700 mb-4`}>
+                    <FaExclamationTriangle className={"text-[1.2rem]"}/>This page may not behave properly on narrow screens.
+                </div>
+                {/*Temporary solution, TODO: Find a more efficient way to do this*/}
+                <div className={`gap-2 mod-cards max-w-[1380px] mx-auto mb-4 modrinth dark:modrinth-dark hidden mmd:grid ${mr["display-mode--grid"]}`}>
+                    {mods.map((mod: ModrinthMod) => (
+                        <Link href={"https://modrinth.com/mod/" + mod.slug} target={"_blank"} key={mod.id + "-link"} className={"transition-transform hover:scale-[1.01]"}>
+                            <ProjectCard
+                                key={mod.id}
+                                author={"Awakened Redstone"}
+                                name={mod.title}
+                                iconUrl={mod.icon_url}
+                                description={mod.description}
+                                clientSide={mod.client_side}
+                                serverSide={mod.server_side}
+                                downloads={mod.downloads}
+                                follows={mod.followers}
+                                //categories={mod.categories}
+                                updatedAt={mod.updated}
+                            />
+                        </Link>
+                    ))}
+                </div>
 
+                <div className={`grid gap-2 mod-cards max-w-[1380px] mx-auto mb-4 modrinth dark:modrinth-dark mmd:hidden ${mr["display-mode--list"]}`}>
                     {mods.map((mod: ModrinthMod) => (
                         <Link href={"https://modrinth.com/mod/" + mod.slug} target={"_blank"} key={mod.id + "-link"} className={"transition-transform hover:scale-[1.01]"}>
                             <ProjectCard

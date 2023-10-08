@@ -215,10 +215,7 @@
   gap: var(--gap-md);
 
   .stat {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: fit-content;
+    @apply flex flex-row items-center w-fit;
     gap: var(--gap-xs);
     --stat-strong-size: 1.25rem;
 

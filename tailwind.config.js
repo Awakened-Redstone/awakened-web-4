@@ -23,6 +23,8 @@ module.exports = {
       },
       screens: {
         'lmd': '920px',
+        'mmd': '840px',
+        'xsm': '430px',
       },
       transitionProperty: {
         'fade': 'background, color, opacity',
