@@ -28,7 +28,7 @@ export default function App({Component, pageProps}: AppProps) {
                 <title>Awakened Redstone</title>
                 <meta name="description" content="Awakened Redstone's personal website. Here you can find more about me and my projects"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <meta name="twitter:card" content="summary_large_image"/>
+                <meta name="twitter:card" content="summary"/>
                 <meta property="og:image" content="/assets/redstone_border.png"/>
                 <link rel="icon" href="/assets/redstone_border.png"/>
                 <meta name="theme-color" content={"#d30808"}/>
