@@ -159,6 +159,7 @@ a {
 
 @layer utilities {
   .modrinth {
+    color: var(--color-text);
     --gap-xs: 0.25rem;
     --gap-sm: 0.5rem;
     --gap-md: 0.75rem;
@@ -205,6 +206,8 @@ a {
     --color-contrast: var(--dark-color-contrast);
     --color-heading: #c4cfdd;
     --color-text-dark: #ecf9fb;
+    --dark-color-contrast: #ecf9fb;
+    --dark-color-text: #b0bac5;
 
     --color-ad: #1f324a;
 

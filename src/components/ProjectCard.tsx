@@ -2,7 +2,7 @@ import mr from '@/styles/Modrinth.module.scss'
 import {Image} from "@nextui-org/image";
 import {LuCalendar, LuDownload, LuEdit, LuGlobe, LuHardDrive, LuHeart, LuInfo, LuMonitor} from "react-icons/lu";
 import {formatCategory, formatNumber} from "@/system/utils";
-import React from "react";
+import React, {ReactElement} from "react";
 import {Tooltip} from "@nextui-org/react";
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -25,12 +25,12 @@ function Avatar({src, alt, size, circle, noShadow, pixelated}: {
     pixelated?: boolean
 }) {
     return (
-        <>
+        <div className={mr["icon"]}>
             {
                 src ? (
                     <Image
                         tabIndex={-1}
-                        className={`avatar size-${size} ${circle ? 'circle' : ''} ${noShadow ? 'no-shadow' : ''} ${pixelated ? 'pixelated' : ''}`}
+                        className={`${mr["avatar"]} w-${size} h-${size} ${circle ? 'circle' : ''} ${noShadow ? 'no-shadow' : ''} ${pixelated ? 'pixelated' : ''}`}
                         src={src}
                         alt={alt}
                         loading="lazy"
@@ -38,7 +38,7 @@ function Avatar({src, alt, size, circle, noShadow, pixelated}: {
                 ) : (
                     <svg
                         tabIndex={-1}
-                        className={`avatar size-${size} ${circle ? 'circle' : ''} ${noShadow ? 'no-shadow' : ''}`}
+                        className={`${mr["avatar"]} w-${size} h-${size} ${circle ? 'circle' : ''} ${noShadow ? 'no-shadow' : ''}`}
                         xmlSpace="preserve"
                         fillRule="evenodd"
                         strokeLinecap="round"
@@ -55,7 +55,7 @@ function Avatar({src, alt, size, circle, noShadow, pixelated}: {
                     </svg>
                 )
             }
-        </>
+        </div>
     );
 }
 
@@ -71,42 +71,42 @@ const EnvironmentIndicator = function ({clientSide, serverSide, type = 'mod', ty
             return (
                 <>
                     <LuGlobe aria-hidden="true"/>
-                    Client or server
+                    &nbsp;Client or server
                 </>
             );
-        } else if (clientSide === 'optional' && serverSide === 'optional') {
+        } else if (clientSide === 'required' && serverSide === 'required') {
             return (
                 <>
                     <LuGlobe aria-hidden="true"/>
-                    Client and server
+                    &nbsp;Client and server
                 </>
             );
         } else if ((clientSide === 'optional' || clientSide === 'required') && (serverSide === 'optional' || serverSide === 'unsupported')) {
             return (
                 <>
                     <LuMonitor aria-hidden="true"/>
-                    Client
+                    &nbsp;Client
                 </>
             );
         } else if ((serverSide === 'optional' || serverSide === 'required') && (clientSide === 'optional' || clientSide === 'unsupported')) {
             return (
                 <>
                     <LuHardDrive aria-hidden="true"/>
-                    Server
+                    &nbsp;Server
                 </>
             );
         } else if (serverSide === 'unsupported' && clientSide === 'unsupported') {
             return (
                 <>
                     <LuGlobe aria-hidden="true"/>
-                    Unsupported
+                    &nbsp;Unsupported
                 </>
             );
         } else if (alwaysShow) {
             return (
                 <>
                     <LuInfo aria-hidden="true"/>
-                    A {type}
+                    &nbsp;A {type}
                 </>
             );
         } else {
@@ -118,13 +118,13 @@ const EnvironmentIndicator = function ({clientSide, serverSide, type = 'mod', ty
         <>
             {
                 typeOnly ? (
-                    <span className={mr["environment"]}>
+                    <span className={`${mr["environment"]} inline-flex items-center`}>
                         <LuInfo aria-hidden="true"/>
                         A {type}
                     </span>
                 ) : (
                     !['resourcepack', 'shader'].includes(type) && !(type === 'plugin') ? (
-                        <span className={mr["environment"]}>
+                        <span className={`${mr["environment"]} inline-flex items-center`}>
                             {content}
                         </span>
                     ) : null
@@ -134,7 +134,12 @@ const EnvironmentIndicator = function ({clientSide, serverSide, type = 'mod', ty
     )
 }
 
-function Categories({categories, children}: { categories: any[], children?: any }) {
+export type Category = {
+    icon: ReactElement
+    name: string
+}
+
+function Categories({categories, children}: { categories: Category[], children?: any }) {
     return (
         <div className={mr["categories"]}>
             {children}
@@ -151,7 +156,7 @@ function Categories({categories, children}: { categories: any[], children?: any 
     )
 }
 
-const ProjectCard = function ({children, type = 'mod', name = "Unknown project", author, description = "No description provided", iconUrl = "#", downloads, follows, createdAt = '0000-00-00', updatedAt = '0000-00-00', categories = [], serverSide, clientSide, featuredImage, showUpdatedDate = true, color}: {
+const ProjectCard = function ({children, type = 'mod', name = "Unknown project", author, description = "No description provided", iconUrl, downloads, follows, createdAt = '0000-00-00', updatedAt = '0000-00-00', categories = [], serverSide, clientSide, featuredImage, showUpdatedDate = true, color}: {
     children?: any
     type: 'mod' | 'modpack' | 'resourcepack' | 'shader' | 'plugin'
     name: string
@@ -162,7 +167,7 @@ const ProjectCard = function ({children, type = 'mod', name = "Unknown project",
     follows?: number
     createdAt: string
     updatedAt: string
-    categories: any[]
+    categories: Category[]
     serverSide?: EnvironmentCompatibility
     clientSide?: EnvironmentCompatibility
     featuredImage?: string
@@ -201,21 +206,24 @@ const ProjectCard = function ({children, type = 'mod', name = "Unknown project",
 
     return (
         <>
-            <article className={`transition-background ${mr["project-card"]} ${mr["base-card"]}`} aria-label="name" role="listitem">
-                <Avatar src={iconUrl} alt={name} size="md" no-shadow/>
-                <div style={bgStyle}>
-                    <Image src={featuredImage ?? "https://cdn-raw.modrinth.com/placeholder.svg"} alt="gallery image" loading="lazy" tabIndex={-1}/>
-                </div>
+            <article className={`w-full h-full transition-background ${mr["project-card"]} ${mr["base-card"]}`} aria-label="name" role="listitem">
+                <Avatar src={iconUrl} alt={name} size="24" no-shadow/>
+                {
+                    featuredImage ? (
+                        <div style={bgStyle}>
+                            <Image src={featuredImage} alt="gallery image" loading="lazy" tabIndex={-1}/>
+                        </div>
+                    ) : null
+                }
                 <div className={mr["title"]}>
                     <h2 className={mr["name"]}>
                         {name}
                     </h2>
                     {
                         author ? (
-                            <div className={mr["author"]}>
-                                <Avatar src="iconUrl" alt="name" size="sm" circle/>
-                                {author}
-                            </div>
+                            <p className={`${mr["author"]} inline-flex`}>
+                                by&nbsp;<div className={mr["title-link"]}>{author}</div>
+                            </p>
                         ) : null
                     }
                 </div>
@@ -261,14 +269,14 @@ const ProjectCard = function ({children, type = 'mod', name = "Unknown project",
                     </div>
                     {
                         showUpdatedDate ? (
-                            <Tooltip content={updatedDate()}>
+                            <Tooltip content={updatedDate()} showArrow>
                                 <div className={`${mr["stat"]} ${mr["date"]}`}>
                                     <LuEdit aria-hidden="true"/>
                                     <span className={mr["date-label"]}>Updated </span>{sinceUpdated()}
                                 </div>
                             </Tooltip>
                         ) : (
-                            <Tooltip content={createdDate()}>
+                            <Tooltip content={createdDate()} showArrow>
                                 <div className={`${mr["stat"]} ${mr["date"]}`}>
                                     <LuCalendar aria-hidden="true"/>
                                     <span className={mr["date-label"]}>Published </span>{sinceCreation()}
