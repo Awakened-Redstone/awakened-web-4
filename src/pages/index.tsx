@@ -12,7 +12,7 @@ import {
     TbBrandJavascript,
     TbBrandNextjs,
     TbBrandReact,
-    TbBrandTypescript,
+    TbBrandTypescript, TbExternalLink,
     TbTools
 } from "react-icons/tb";
 import {HiCode, HiExternalLink} from "react-icons/hi";
@@ -125,7 +125,7 @@ export default function Home() {
                                 <div className={"m-auto h-fit"}>
                                     <div className={"text-2xl"}>GitHub</div>
                                     <div className={"text-4xl inline-flex items-center align-middle"}>Repositories</div>
-                                    <div className={"text-2xl absolute top-2 right-2"}><HiExternalLink/></div>
+                                    <div className={"text-2xl absolute top-2 right-2"}><TbExternalLink/></div>
                                 </div>
                             </div>
                         </a>
@@ -183,7 +183,7 @@ export default function Home() {
                                     <div className={"text-2xl"}>Support me</div>
                                     <div className={"text-3xl w-full inline-flex justify-center items-center align-middle"}>
                                         Donate
-                                        <div className={"text-2xl absolute top-2 right-2"}><HiExternalLink/></div>
+                                        <div className={"text-2xl absolute top-2 right-2"}><TbExternalLink/></div>
                                     </div>
                                 </div>
                             </div>
@@ -204,9 +204,11 @@ export default function Home() {
                                 <li className={"line-through"}>Fix the mobile navigation as it is likely broken due to the item above</li>
                                 <li className={"line-through"}>Make the home nav dynamic</li>
                                 <li>Finish the about page</li>
-                                <li>Use the proper Modrinth™ style on the mods page</li>
+                                <li className={"line-through"}>Use the proper Modrinth™ style on the mods page</li>
                                 <li>Add documentation pages</li>
                                 <li>Finish the home page</li>
+                                <li>Make languages and tools show name on hover</li>
+                                <li>Make languages and tools have links</li>
                             </ul>
                         </div>
                     </div>*/}
