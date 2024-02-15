@@ -50,6 +50,11 @@ export default function About() {
                                 <SiElixir/>&nbsp;Elixir
                             </a>
                         </div>
+                        <br/>
+                        I often working on personal projects and sometimes contribute to other ones too.
+                        <br/>
+                        I was the lead developer of the <a href={"https://twitter.com/CharityPlayroom"}>Playroom Charity event in 2024</a>, working on the custom mod adding a
+                        Tiltify integration and a custom item for the event. I have worked with Bawnorton, BlazeFaia, macstevins and nebme to make the mod. 
                     </div>
                 </div>
             </main>
