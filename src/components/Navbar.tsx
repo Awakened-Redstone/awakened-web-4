@@ -175,15 +175,15 @@ export const navItems: (MenuItem | Category)[] = [
     },
     {
         content: "Docs",
-        // wrapper: buildDefaultWrapper("https://docs.awakenedredstone.com"),
-        wrapper: (mobile, content) => (
+        wrapper: buildDefaultWrapper("https://docs.awakenedredstone.com"),
+        /*wrapper: (mobile, content) => (
             <Tooltip content={"🚧 Under construction"} showArrow placement={"bottom"}>
                 <div className={getLinkClasses(mobile)}>
                     {content}
                 </div>
             </Tooltip>
-        ),
-        className: "opacity-50 hover:opacity-50 cursor-no-drop",
+        ),*/
+        //className: "opacity-50 hover:opacity-50 cursor-no-drop",
         prefix: <TbBook2/>,
         key: "docs",
     },
