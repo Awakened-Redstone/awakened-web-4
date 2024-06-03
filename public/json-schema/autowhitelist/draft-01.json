@@ -1,0 +1,112 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "$id": "https://awakenedredstone.com/json-schema/autowhitelist/draft-01.json",
+    "title": "AutoWhitelist Config",
+    "description": "The AutoWhitelist mod config schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "pattern": "^https://awakenedredstone\\.com/json-schema/autowhitelist/draft-\\d{2}.json$"
+        },
+        "CONFIG_VERSION": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 127
+        },
+        "enable_whitelist_cache": {
+            "type": "boolean",
+            "default": true
+        },
+        "update_period": {
+            "type": "integer",
+            "default": 60,
+            "minimum": 30,
+            "maximum": 600
+        },
+        "admins": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "integer",
+                "minimum": 0
+            }
+        },
+        "bot_activity_type": {
+            "type": "string",
+            "enum": [
+                "NONE",
+                "RESET",
+                "PLAYING",
+                "STREAMING",
+                "LISTENING",
+                "WATCHING"
+            ],
+            "default": "PLAYING"
+        },
+        "prefix": {
+            "type": "string",
+            "default": "np!"
+        },
+        "lock_time": {
+            "type": "string",
+            "pattern": "^(\\d+[smhdwMy]? ?)+$",
+            "default": "1d"
+        },
+        "token": {
+            "type": "string",
+            "default": "DO NOT SHARE THE BOT TOKEN"
+        },
+        "discord_server_id": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+        },
+        "ephemeral_replies": {
+            "type": "boolean",
+            "default": true
+        },
+        "entries": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "roles": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                            "type": "string",
+                            "pattern": "\\d+|@.+"
+                        }
+                    },
+                    "type": {
+                        "type": "string",
+                        "pattern": "^([a-z0-9_.\\-]+:)?[a-z0-9_.\\-]+$"
+                    },
+                    "execute": {
+                        "type": "object",
+                        "additionalProperties": true
+                    }
+                },
+                "required": ["type", "roles"]
+            }
+        }
+    },
+    "required": [
+        "$schema",
+        "CONFIG_VERSION",
+        "enable_whitelist_cache",
+        "update_period",
+        "admins",
+        "bot_activity_type",
+        "prefix",
+        "lock_time",
+        "token",
+        "discord_server_id",
+        "ephemeral_replies",
+        "entries"
+    ]
+}
