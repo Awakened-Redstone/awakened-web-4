@@ -51,7 +51,7 @@
         },
         "lock_time": {
             "type": "string",
-            "pattern": "^(\\d+[smhdwMy]? ?)+$",
+            "pattern": "^(\\d+[smhdwMy]? ?)+$|^-1$",
             "default": "1d"
         },
         "token": {
