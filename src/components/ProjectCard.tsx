@@ -1,6 +1,7 @@
 import mr from '@/styles/Modrinth.module.scss'
 import {Image} from "@nextui-org/image";
-import {LuCalendar, LuDownload, LuEdit, LuGlobe, LuHardDrive, LuHeart, LuInfo, LuMonitor} from "react-icons/lu";
+import {LuCalendar, LuDownload, LuGlobe, LuHardDrive, LuHeart, LuInfo, LuMonitor} from "react-icons/lu";
+import {GrUpdate} from "react-icons/gr";
 import {formatCategory, formatNumber} from "@/system/utils";
 import React, {ReactElement} from "react";
 import {Tooltip} from "@nextui-org/react";
@@ -271,7 +272,7 @@ const ProjectCard = function ({children, type = 'mod', name = "Unknown project",
                         showUpdatedDate ? (
                             <Tooltip content={updatedDate()} showArrow>
                                 <div className={`!hidden sm:!flex ${mr["stat"]} ${mr["date"]}`}>
-                                    <LuEdit aria-hidden="true"/>
+                                    <GrUpdate aria-hidden="true"/>
                                     <span className={mr["date-label"]}>Updated </span>{sinceUpdated()}
                                 </div>
                             </Tooltip>
