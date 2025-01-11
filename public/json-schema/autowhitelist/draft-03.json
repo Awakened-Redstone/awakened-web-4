@@ -71,12 +71,6 @@
             "type": "boolean",
             "default": true
         },
-        "command_permission_level": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 4,
-            "default": 3
-        },
         "entries": {
             "type": "array",
             "default": [],
@@ -118,7 +112,6 @@
         "discord_server_id",
         "ephemeral_replies",
         "cache_discord_data",
-        "command_permission_level",
         "entries"
     ]
 }
